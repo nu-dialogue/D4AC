@@ -1,0 +1,29 @@
+amazon_polly:
+  identityPoolId: ap-northeast-1....
+  region: ap-northeast-1
+continuous_voice_recognition: true
+dialog_server:
+  botId: 1855_....
+  initTopicId: d4acsample03
+  port: 8080
+  server_type: test_dialog
+facepp:
+  apikey: ....
+  secret: ....
+post_server:
+  enable: false
+  url: http://localhost:8888/dummyResponse/
+server_port: 8000
+user_status:
+  on_request: false
+  send_gender_and_age: false
+  silence:
+    only_upon_changes: true
+    period: 4.0
+    send: false
+  su_end:
+    send: false
+  uu_end:
+    send: false
+video_input:
+  device_id: '0'
