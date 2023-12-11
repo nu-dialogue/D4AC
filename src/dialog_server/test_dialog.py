@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# test_dialog_template_d4ac.py
-#   template for a test dialog server. to be used by copying this.
+# test_dialog.py
+#   test dialog server. to be modified
 # (c) Nagoya University
 
 
