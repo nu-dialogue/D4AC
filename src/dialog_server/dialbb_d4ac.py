@@ -1,7 +1,13 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# dialbb_d4ac.py
+#   communicate with dialbb app
+# (c) Nagoya University
+
 import datetime
 import urllib.request
 import json
-from typing import Dict, Any
 from util.logger import createLogger
 logger = createLogger("dialbb_client")
 

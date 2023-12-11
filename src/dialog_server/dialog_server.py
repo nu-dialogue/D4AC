@@ -3,7 +3,7 @@
 #
 # dialog_server.py
 #   sends speech recognition results and user status to a dialog server
-#   ChatGPTを用いた対話
+# (c) Nagoya University
 
 __version__ = '0.1'
 __copyright__ = 'Nagoya University'

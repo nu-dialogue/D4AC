@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# faceapp_client.py
+#   client of face++
+# (c) Nagoya University
+
+
 import json
 import requests
 import paho.mqtt.client as paho

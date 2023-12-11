@@ -3,7 +3,7 @@
 #
 # d4ac_main.py
 #   main module of D4AC
-#
+# (c) Nagoya University
 
 import sys
 import os

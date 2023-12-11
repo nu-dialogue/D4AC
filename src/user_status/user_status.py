@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# user_status.py
+#   mqtt node estimating user status from mediapipe output
+# (c) Nagoya University
+
+
 import json
 import paho.mqtt.client as paho
 import os

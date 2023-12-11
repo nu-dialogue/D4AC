@@ -1,4 +1,12 @@
-from typing import Optional, Dict,Union
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# urls.py
+#   web server of sample external server
+# (c) Nagoya University
+
+
+from typing import Optional, Dict, Union
 from fastapi import FastAPI
 from pydantic import BaseModel
 

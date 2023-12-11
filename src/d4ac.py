@@ -1,4 +1,10 @@
-from email.policy import default
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# d4ac.py
+#   main module
+# (c) Nagoya University
+
 import socket
 import subprocess
 import PySimpleGUI as sg
@@ -48,7 +54,6 @@ def main():
     facepp = config['facepp']
 
     fppid = None
-    fapid = None
     vipid = None
     dmpid = None
     dspid = None
@@ -282,8 +287,6 @@ def main():
 
     if fppid is not None:
         fppid.terminate()
-    if fapid is not None:
-        fapid.terminate()
     if vipid is not None:
         vipid.terminate()
     if dmpid is not None:
