@@ -62,7 +62,7 @@ export default {
                     }
                     const length = event.results.length;
                     this.userutterance = event.results[length - 1][0].transcript;
-                    if (event.results[length - 1].isFinal) {
+                    if (this.userutterance !== "" && event.results[length - 1].isFinal) {
                         this.utterances.unshift({
                             component: "UserUtterance",
                             expression: this.userutterance,
