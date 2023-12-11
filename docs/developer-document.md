@@ -182,7 +182,7 @@ dialog_server:
   botId: 1855_....
   initTopicId: d4acsample03
   port: 8080
-  server_type: test_dialog
+  server_type: dummy_dialog
 facepp:
   apikey: ....
   secret: ....
@@ -287,7 +287,7 @@ video_input:
 
 #### 対話サーバ
 
-- xAIML-SUNABAとの通信モジュールが用意されている
+- xAIML-SUNABA，DialBB，dummy dialog (オウム返し），test dialog（開発テスト用）との通信モジュールが用意されている
 
 #### Android D4AC クライアントアプリ
 
