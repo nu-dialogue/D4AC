@@ -1,8 +1,16 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# test_dialog_template_d4ac.py
+#   template for a test dialog server. to be used by copying this.
+# (c) Nagoya University
+
+
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 from util.logger import createLogger
-logger = createLogger("dummy_dialog")
+logger = createLogger("test_dialog")
 
 
 class TestDialog:

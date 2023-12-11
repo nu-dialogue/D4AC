@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# sampleExtServer/main.py
+#   sample external server (auxiliary output)
+# (c) Nagoya University
+
+
+#!/usr/bin/env python3
 from urls import app
 import uvicorn
 
 import argparse
-import sys
 
 
 

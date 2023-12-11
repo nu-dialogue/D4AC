@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# video_input.py
+#   get camera images
+# (c) Nagoya University
+
 
 import cv2
 import base64

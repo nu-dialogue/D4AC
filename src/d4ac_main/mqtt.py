@@ -1,5 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# mqtt.py
+#   mqtt communication of D4AC main
+# (c) Nagoya University
+
 import paho.mqtt.client as paho
-import time
 import json
 
 engagement = ""
