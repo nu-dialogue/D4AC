@@ -255,8 +255,8 @@ Face++のAPI Key, API Secretの取得方法については，[ここ](docs/facep
 | d4ac_main | d4ac_main（メインプログラム）を起動，終了します． |
 | video_input | video_input（カメラ画像入力）を起動，終了します．Chromeの時のみ使用してください． |
 | face++ | face++（Face++ ユーザ状態推定）を起動，終了します． |
-| mediapipe | mediapipe（mediapipeユーザ状態推定結果）を起動，終了します．（windowsのみ使用可能） |
-| userstatus | userstatus（mediapipe対話参加度）を起動，終了します． |
+| mediapipe | mediapipe（mediapipeユーザ状態推定）を起動，終了します．（windowsのみ使用可能） |
+| userstatus | userstatus（mediapipeの結果から対話参加度を推定するモジュール）を起動，終了します． |
 
 各プログラムを起動すると，画面上に`running`と表示されます．起動中のプログラムは`stop`ボタンで停止できます．
 

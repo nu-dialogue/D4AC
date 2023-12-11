@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 #
 # controllers.py
-#
-#
+#    web server of d4ac main
+# (c) Nagoya University
 
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles

@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# sunaba_d4ac.py
+#   communicate with a xaiml sunaba app
+# (c) Nagoya University
+
 import datetime
 import urllib.request
 import json

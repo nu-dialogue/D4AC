@@ -4,7 +4,7 @@ export default {
         return {
             sessionId: "",
             started: false,
-            first: true,
+            //first: true,
             voice: false,
             recog: undefined,
             speechFunc: undefined,
@@ -21,16 +21,16 @@ export default {
     methods: {
         send: async function (utterance) {
             try {
-                if (this.first) {
+                /* if (this.first) {
                     const ret = await axios.get(`/continuefirst/${this.sessionId}/${utterance}`);
                     console.log('/continuefirst/', ret)
                     this.first = false
                     await this.system(ret.data.systemUtterance);
-                } else {
-                    const ret = await axios.get(`/continue/${this.sessionId}/${utterance}`);
-                    console.log('/continuefirst/', ret)
-                    await this.system(ret.data.systemUtterance);
-                }
+                } else { */
+                const ret = await axios.get(`/continue/${this.sessionId}/${utterance}`);
+                console.log('/continue/', ret)
+                await this.system(ret.data.systemUtterance);
+                //}
 
             } catch (e) {
                 this.status = "D4AC Error"

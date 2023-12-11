@@ -1,8 +1,16 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# test_dialog.py
+#   test dialog server. to be modified
+# (c) Nagoya University
+
+
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 from util.logger import createLogger
-logger = createLogger("dummy_dialog")
+logger = createLogger("test_dialog")
 
 
 class TestDialog:

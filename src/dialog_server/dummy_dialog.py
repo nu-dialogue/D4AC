@@ -1,5 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# dummy_dialog.py
+#   communicate with a dummy (parroting) dialog server
+# (c) Nagoya University
+
 import json
-from pprint import pprint
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))

@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# mesh.py
+#   mediapipe client
+# (c) Nagoya University
+
+
 import mediapipe as mp
 import paho.mqtt.client as paho
 import sys
