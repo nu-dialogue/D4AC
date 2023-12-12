@@ -461,6 +461,10 @@ D4ACの開発に当たっては，[名古屋大学 卓越大学院プログラ�
 
 [Apache 2.0](LICENSE)
 
+## 問い合わせ先
+
+Email: `d4ac` at `ds.is.i.nagoya-u.ac.jp`
+
 ## 著作権
 
 Copyright 2023 Nagoya University
