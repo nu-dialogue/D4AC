@@ -4,25 +4,25 @@ version = "0.1.0"
 description = ""
 authors = ["Mikio Nakano <mikio.nakano@c4a.jp>"]
 packages = [
-    { include = "src/*.py"},
-    { include = "src/d4ac_main/*.py"},
-   { include = "src/facepp/*.py" },
-    { include = "src/dialog_server/*.py" },
-    {include = "src/mediapipe/*.py"},
-    {include = "src/util/*.py"},
-    {include = "src/video_input/*.py" },
-    {include = "src/user_status/*.py" }
+    { include = "d4ac/*.py"},
+    { include = "d4ac/d4ac_main/*.py"},
+   { include = "d4ac/facepp/*.py" },
+    { include = "d4ac/dialog_server/*.py" },
+    {include = "d4ac/mediapipe/*.py"},
+    {include = "d4ac/util/*.py"},
+    {include = "d4ac/video_input/*.py" },
+    {include = "d4ac/user_status/*.py" }
 ]
-exclude =["src/android/*", "src/frontend/*" ]
-include = ["src/d4ac_main/static/css/*.css",
-"src/config-template.yml",
-"src/d4ac_main/static/images/*" ,
-"src/d4ac_main/static/js/*" ,
-"src/d4ac_main/templates/*" ]
+exclude =["d4ac/android/*", "d4ac/frontend/*" ]
+include = ["d4ac/d4ac_main/static/css/*.css",
+"d4ac/config-template.yml",
+"d4ac/d4ac_main/static/images/*" ,
+"d4ac/d4ac_main/static/js/*" ,
+"d4ac/d4ac_main/templates/*" ]
  
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 aiofiles="^0.6.0"
 altgraph="^0.17"
 certifi="^2020.12.5"
@@ -52,7 +52,7 @@ uvicorn="^0.13.4"
 zipp="^3.4.1"
 pandas="^1.4.1"
 openpyxl="^3.0.9"
-PySimpleGUI = "^4.60.3"
+TkEasyGUI = "^0.2.73"
 requests = "^2.28.1"
 azure-cognitiveservices-vision-face = "^0.6.0"
 mediapipe =  { version = "^0.9.0" ,markers = "sys_platform == 'win32'" }
@@ -64,4 +64,4 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-d4ac = 'src.d4ac:main'
+d4ac = 'd4ac.d4ac:main'
