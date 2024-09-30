@@ -5,7 +5,7 @@ continuous_voice_recognition: true
 dialog_server:
   botId: 1855_....
   initTopicId: d4acsample03
-  port: 8080
+  port: 8001
   server_type: test_dialog
 facepp:
   apikey: ....

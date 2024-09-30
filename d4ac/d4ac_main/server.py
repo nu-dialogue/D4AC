@@ -7,7 +7,7 @@ from mqtt import getMqttData
 
 logger = None
 
-url = "http://localhost:8080/dialog/"
+url = "http://localhost:8001/dialog/"
 
 config = {}
 uu_send: bool = False
@@ -32,7 +32,7 @@ def setConfig(config_yml, host, log):
     global post_url
     global logger
     logger = log
-    url = "http://" + host + ":8080/dialog/"
+    url = "http://" + host + ":8001/dialog/"
     config = config_yml
     print(config)
     user_status = config['user_status']

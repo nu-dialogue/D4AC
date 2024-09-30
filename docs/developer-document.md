@@ -81,7 +81,7 @@ poetry shell
 ### GUIから起動する方法
 
 ```sh
-python src/d4ac.py
+python d4ac/d4ac.py
 ```
 
 を実行するとGUIの画面が表示される．GUI設定ファイルの編集や，各モジュールの起動，終了ができる．GUIの操作方法はREADMEを参照．
@@ -181,7 +181,7 @@ continuous_voice_recognition: true
 dialog_server:
   botId: 1855_....
   initTopicId: d4acsample03
-  port: 8080
+  port: 8001
   server_type: dummy_dialog
 facepp:
   apikey: ....

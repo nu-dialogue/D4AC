@@ -216,7 +216,9 @@ D4ACを起動すると，設定画面が表示されます．そこにて各種�
 
 #### Amazon Polly TTSタブ
 
-音声合成をAmazon Polyを用いて行うための設定です．（詳細は今後記述します）
+音声合成をAmazon Polyを用いて行うための設定です．
+
+identity PoolIdとregionを設定します。これらを取得するには、AWSのアカウントの取得と設定が必要で、その方法は[このページ](https://docs.aws.amazon.com/ja_jp/sdk-for-javascript/v2/developer-guide/getting-started-browser.html)に載っていますが、技術知識が必要なので、詳しい人に聞いてください。
 
 ![d4ac3](docs/images/d4ac3.png)
 

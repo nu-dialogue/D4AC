@@ -7,7 +7,7 @@
 
 import socket
 import subprocess
-import PySimpleGUI as sg
+import TkEasyGUI as sg
 import os
 import yaml
 
@@ -62,12 +62,12 @@ def main():
     host = socket.gethostname()
     ip = socket.gethostbyname(host)
 
-    user_layout=[[sg.T("Camera device ID"),
-                  sg.In(video_input['device_id'], key='-cameraDeviceId-')],
+    user_layout=[[sg.Text("Camera device ID"),
+                  sg.Input(video_input['device_id'], key='-cameraDeviceId-')],
                  [sg.Checkbox("Recognize speech continuously",
                               default=config['continuous_voice_recognition'],
                               key='-continuousVoiceRecognition-')],
-                 [sg.T("Sending user status")],
+                 [sg.Text("Sending user status")],
                  [sg.Checkbox("Send at the end of user utterances",
                               default=user_status['uu_end']['send'],
                               key='-uu_end-')],
@@ -78,7 +78,7 @@ def main():
                               default=silence['send'],
                               key='-silence-',
                               enable_events=True)],
-                 [sg.T('interval (sec.)'), sg.Slider(range=(1,60),
+                 [sg.Text('interval (sec.)'), sg.Slider(range=(1,60),
                                                      default_value=silence['period'],
                                                      disabled=not silence['send'],
                                                      orientation='horizontal',
@@ -94,54 +94,54 @@ def main():
                  [sg.Checkbox('Send gender and age',
                               default=user_status['send_gender_and_age'],
                               key='-genderage-')]]
-    dialog_layout =[[sg.T("Dialog server settings")],
-                    [sg.T("server_type"),
+    dialog_layout =[[sg.Text("Dialog server settings")],
+                    [sg.Text("server_type"),
                      sg.Combo(values=['dummy_dialog', 'xaiml_sunaba', 'dialbb', 'test_dialog'],
                               default_value=dialog['server_type'],
                               key='-serverType-')],
-                    [sg.T("BotId (for xaiml_sunaba)"),
-                     sg.In(dialog['botId'],key='-botId-')],
-                    [sg.T("initTopicId (for xaiml_sunaba)"),
-                     sg.In(dialog['initTopicId'],
+                    [sg.Text("BotId (for xaiml_sunaba)"),
+                     sg.Input(dialog['botId'],key='-botId-')],
+                    [sg.Text("initTopicId (for xaiml_sunaba)"),
+                     sg.Input(dialog['initTopicId'],
                            key='-initTopicId-')]]
-    postServer_layout = [[sg.T('Posting to the external server')],
+    postServer_layout = [[sg.Text('Posting to the external server')],
                          [sg.Checkbox('Post dialog server outputs to the external server',
                                       key='-postServer-',
                                       default=post['enable'],
                                       enable_events=True)],
-                         [sg.T('External server URL'),
+                         [sg.Text('External server URL'),
                           sg.Input(post['url'], key='-postServerUrl-',
                                    disabled=not post['enable'])]]
     main_col = sg.Column([[sg.Frame('D4AC', [
-        [sg.T("IP address of this PC: " + ip)],
-        [sg.T('Path of D4AC package: ' + dir)],
-        [sg.T('dialog_server'),
+        [sg.Text("IP address of this PC: " + ip)],
+        [sg.Text('Path of D4AC package: ' + dir)],
+        [sg.Text('dialog_server'),
          sg.Button('start',key='-dsStart-'),
-         sg.T('stopeed', key='-dsStatus-'),
-         sg.Button('stop', key='-dsEnd-',disabled = True)],
-        [sg.T('d4ac_main'),
+         sg.Text('stopeed', key='-dsStatus-'),
+         sg.Button('stop', key='-dsEnd-', disabled=True)],
+        [sg.Text('d4ac_main'),
          sg.Button('start', key='-dmStart-'),
-         sg.T('stopped', key='-dmStatus-'),
-         sg.Button('stop', key='-dmEnd-', disabled = True)],
-        [sg.T('video_input'),
+         sg.Text('stopped', key='-dmStatus-'),
+         sg.Button('stop', key='-dmEnd-', disabled=True)],
+        [sg.Text('video_input'),
          sg.Button('start',key='-viStart-'),
-         sg.T('stopped',key='-viStatus-'),
-         sg.Button('stop',key='-viEnd-',disabled = True),
-         sg.T("Web client only")]])]])
+         sg.Text('stopped',key='-viStatus-'),
+         sg.Button('stop',key='-viEnd-', disabled=True),
+         sg.Text("Web client only")]])]])
     
     userstatus_col = sg.Column([
-                 [sg.Frame('face++',[[sg.T('face++'),
+                 [sg.Frame('face++',[[sg.Text('face++'),
                                       sg.Button('start', key='-fpStart-'),
-                                      sg.T('stopped', key='-fpStatus-'),
+                                      sg.Text('stopped', key='-fpStatus-'),
                                       sg.Button('stop', key='-fpEnd-',disabled = True)]] )],
                  [sg.Frame('mediapipe (Windows only)',
-                           [[sg.T('mediapipe'),
+                           [[sg.Text('mediapipe'),
                              sg.Button('stop', key='-mpStart-', disabled=not windows),
-                             sg.T('stopped', key='-mpStatus-'),
+                             sg.Text('stopped', key='-mpStatus-'),
                              sg.Button('stop', key='-mpEnd-', disabled = True)],
-                    [sg.T('userstatus'),
+                    [sg.Text('userstatus'),
                      sg.Button('stop', key='-usStart-', disabled=not windows),
-                     sg.T('stopped', key='-usStatus-'),
+                     sg.Text('stopped', key='-usStatus-'),
                      sg.Button('stop', key='-usEnd-',disabled= True)]
                 ])]
                 ])
@@ -149,17 +149,16 @@ def main():
                     [main_col],
                     [userstatus_col]
                  ]
-    amazon_layout=[[sg.T("Amazon")],
-                [sg.T("identityPoolId"),
-                 sg.In(amazon['identityPoolId'], key='-identityPoolId-')],
-                [sg.T("region"),
-                 sg.In(amazon['region'], key='-region-')]]
-    facepp_layout=[[sg.T('Face++')],
-                [sg.T("API Key"),
-                 sg.In(facepp['apikey'], key='-faceppapikey-')],
-                [sg.T("API Secret"),
-                 sg.In(facepp['secret'], key='-faceppsecret-')]
-                ]
+    amazon_layout=[[sg.Text("Amazon")],
+                   [sg.Text("identityPoolId"),
+                    sg.Input(amazon['identityPoolId'], key='-identityPoolId-')],
+                   [sg.Text("region"),
+                    sg.Input(amazon['region'], key='-region-')]]
+    facepp_layout=[[sg.Text('Face++')],
+                   [sg.Text("API Key"),
+                    sg.Input(facepp['apikey'], key='-faceppapikey-')],
+                   [sg.Text("API Secret"),
+                    sg.Input(facepp['secret'], key='-faceppsecret-')]]
 
     layout = [[sg.TabGroup([[sg.Tab('User status', user_layout),
                              sg.Tab('Dialog server', dialog_layout),
@@ -205,82 +204,82 @@ def main():
                 yaml.dump(config, file, encoding='utf-8')
         elif event == '-silence-':
             disabled = not values['-silence-']
-            window['-silenceperiod-'].Update(disabled=disabled)
-            window['-silencechanged-'].Update(disabled=disabled)
+            window['-silenceperiod-'].update(disabled=disabled)
+            window['-silencechanged-'].update(disabled=disabled)
         elif event == '-postServer-':
             disabled = not values['-postServer-']
-            window['-postServerUrl-'].Update(disabled=disabled)
+            window['-postServerUrl-'].update(disabled=disabled)
         elif event == '-dsStart-':
-            dspid = execute(poetry,windows,'dialog_server/dialog_server.py')
+            dspid = execute(poetry, windows,'dialog_server/dialog_server.py')
             if not (windows and poetry):
-                window['-dsEnd-'].Update(disabled=False)
-            window['-dsStatus-'].Update("running")
-            window['-dsStart-'].Update(disabled=True)
+                window['-dsEnd-'].update(disabled=False)
+            window['-dsStatus-'].update("running")
+            window['-dsStart-'].update(disabled=True)
         elif event == '-dsEnd-':
             dspid.terminate()
-            window['-dsEnd-'].Update(disabled=True)
-            window['-dsStatus-'].Update("stopped")
-            window['-dsStart-'].Update(disabled=False)
+            window['-dsEnd-'].update(disabled=True)
+            window['-dsStatus-'].update("stopped")
+            window['-dsStart-'].update(disabled=False)
             dspid = None
         elif event == '-dmStart-':
             dmpid = execute(poetry,windows,'d4ac_main/d4ac_main.py')
             if not (windows and poetry):
-                window['-dmEnd-'].Update(disabled = False)
-            window['-dmStatus-'].Update("running")
-            window['-dmStart-'].Update(disabled=True)
+                window['-dmEnd-'].update(disabled = False)
+            window['-dmStatus-'].update("running")
+            window['-dmStart-'].update(disabled=True)
         elif event == '-dmEnd-':
             dmpid.terminate()
-            window['-dmEnd-'].Update(disabled=True)
-            window['-dmStatus-'].Update("stopped")
-            window['-dmStart-'].Update(disabled=False)
+            window['-dmEnd-'].update(disabled=True)
+            window['-dmStatus-'].update("stopped")
+            window['-dmStart-'].update(disabled=False)
             dmpid = None
         elif event == '-viStart-':
             vipid = execute(poetry,windows,'video_input/video_input.py')
             if not (windows and poetry):
-                window['-viEnd-'].Update(disabled = False)
-            window['-viStatus-'].Update("running")
-            window['-viStart-'].Update(disabled = True)
+                window['-viEnd-'].update(disabled = False)
+            window['-viStatus-'].update("running")
+            window['-viStart-'].update(disabled = True)
         elif event == '-viEnd-':
             vipid.terminate()
-            window['-viEnd-'].Update(disabled=True)
-            window['-viStatus-'].Update("stopped")
-            window['-viStart-'].Update(disabled=False)
+            window['-viEnd-'].update(disabled=True)
+            window['-viStatus-'].update("stopped")
+            window['-viStart-'].update(disabled=False)
             vipid = None
         elif event == '-fpStart-':
             fppid = execute(poetry,windows, 'facepp/facepp_client.py')
             if not (windows and poetry):
-                window['-fpEnd-'].Update(disabled=False)
-            window['-fpStatus-'].Update("running")
-            window['-fpStart-'].Update(disabled=True)
+                window['-fpEnd-'].update(disabled=False)
+            window['-fpStatus-'].update("running")
+            window['-fpStart-'].update(disabled=True)
         elif event == '-fpEnd-':
             fppid.terminate()
-            window['-fpEnd-'].Update(disabled=True)
-            window['-fpStatus-'].Update("stopped")
-            window['-fpStart-'].Update(disabled=False)
+            window['-fpEnd-'].update(disabled=True)
+            window['-fpStatus-'].update("stopped")
+            window['-fpStart-'].update(disabled=False)
             fppid = None
         elif event == '-usStart-':
             uspid = execute(poetry,windows,'user_status/facepp_client.py')
             if not (windows and poetry):
-                window['-usEnd-'].Update(disabled=False)
-            window['-usStatus-'].Update("running")
-            window['-usStart-'].Update(disabled=True)
+                window['-usEnd-'].update(disabled=False)
+            window['-usStatus-'].update("running")
+            window['-usStart-'].update(disabled=True)
         elif event == '-usEnd-':
             uspid.terminate()
-            window['-usEnd-'].Update(disabled=True)
-            window['-usStatus-'].Update("stopped")
-            window['-usStart-'].Update(disabled=False)
+            window['-usEnd-'].update(disabled=True)
+            window['-usStatus-'].update("stopped")
+            window['-usStart-'].update(disabled=False)
             uspid = None
         elif event == '-mpStart-':
             mppid = execute(poetry,windows,'mediapipe/mesh.py')
             if not (windows and poetry):
-                window['-mpEnd-'].Update(disabled=False)
-            window['-mpStatus-'].Update("running")
-            window['-mpStart-'].Update(disabled=True)
+                window['-mpEnd-'].update(disabled=False)
+            window['-mpStatus-'].update("running")
+            window['-mpStart-'].update(disabled=True)
         elif event == '-mpEnd-':
             mppid.terminate()
-            window['-mpEnd-'].Update(disabled=True)
-            window['-mpStatus-'].Update("stopped")
-            window['-mpStart-'].Update(disabled=False)
+            window['-mpEnd-'].update(disabled=True)
+            window['-mpStatus-'].update("stopped")
+            window['-mpStart-'].update(disabled=False)
             mppid = None
 
     window.close()

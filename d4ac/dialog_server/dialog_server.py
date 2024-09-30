@@ -28,7 +28,7 @@ from sunaba_d4ac import SunabaDialog
 
 logger = createLogger("dialog_server")
 
-DEFAULT_PORT = 8080
+DEFAULT_PORT = 8001
 
 user_status_requests = {}  # session id -> (keys, values) e.g. ("emotion", ["angry", "happiness"])
 
