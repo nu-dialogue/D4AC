@@ -1,5 +1,7 @@
 # D4AC: A tool for building multimodal dialogue systems
 
+[日本語版](README-ja.md)
+
 ver 1.0.1
 
 ## Overview
