@@ -18,8 +18,8 @@ class DialBBClient:
 
     def __init__(self):
 
-        self._init_url = "http://localhost:8081/init"
-        self._continue_url = "http://localhost:8081/dialogue"
+        self._init_url = "http://localhost:8080/init"
+        self._continue_url = "http://localhost:8080/dialogue"
         self._user_id = "d4ac"
         self._headers = {'Content-Type': 'application/json;charset=UTF-8'}
         self._session_id = ""

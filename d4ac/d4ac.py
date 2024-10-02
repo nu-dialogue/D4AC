@@ -67,7 +67,7 @@ def main():
                  [sg.Checkbox("Recognize speech continuously",
                               default=config['continuous_voice_recognition'],
                               key='-continuousVoiceRecognition-')],
-                 [sg.Text("Sending user status")],
+                 [sg.Text("Sending user states")],
                  [sg.Checkbox("Send at the end of user utterances",
                               default=user_status['uu_end']['send'],
                               key='-uu_end-')],
@@ -160,7 +160,7 @@ def main():
                    [sg.Text("API Secret"),
                     sg.Input(facepp['secret'], key='-faceppsecret-')]]
 
-    layout = [[sg.TabGroup([[sg.Tab('User status', user_layout),
+    layout = [[sg.TabGroup([[sg.Tab('User states', user_layout),
                              sg.Tab('Dialog server', dialog_layout),
                              sg.Tab('Amazon Polly TTS', amazon_layout),
                              sg.Tab('Post to external server', postServer_layout),

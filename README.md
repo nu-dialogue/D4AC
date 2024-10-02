@@ -1,484 +1,486 @@
-# D4AC: マルチモーダル対話システム構築ツール
+# D4AC: A tool for building multimodal dialogue systems
 
-ver 0.1.0
+ver 1.0.1
 
-## 概要
+## Overview
 
-D4AC (Dialogue for All-Client)は名古屋大学で開発されている，マルチモーダル対話システムを非専門家でも簡単に構築できるツール，D4A (Dialogue for All) のクライアント（マルチモーダル入出力部）です．
+D4AC (Dialogue for All-Client) is a client (multimodal input/output part) of D4A (Dialogue for All), a tool developed at Nagoya University that allows non-experts to easily build multimodal dialogue systems.
 
-NTTドコモの[xAIML SUNABA](https://docs.xaiml.docomo-dialog.com/#) またはC4A研究所の[DialBB](https://github.com/c4a-ri/dialbb)を用いて構築・動作する対話サーバのクライアントとして動作します．
+It works as a client of the dialog server built and operated by NTT DoCoMo's [xAIML SUNABA](https://docs.xaiml.docomo-dialog.com/#) or C4A Research Institute, Inc.'s [DialBB](https://github.com/c4a-ri/dialbb). 
 
-対話サーバとD4ACを動作させておき，D4ACが動いているのと同じPC上のChromeまたはAndroid端末から接続して利用できます．（現在Android用のアプリは配布していません．必要な場合は開発者に相談してください）
+After lauching the dialog server and D4AC, you can connect to D4AC from Chrome on the PC where D4AC is running or an Android device.
+(Currently, we do not distribute an application for Android. If you need it, please contact the developer.)
 
-ユーザの顔画像の認識結果から推定した対話参加度や，ユーザの状態に依存して動作を変更する対話システムを作成することができます．
+It is possible to create a dialogue system that changes its behavior depending on the level of dialogue participation estimated from the recognition results of the user's face image, or on the user's state.
 
- D4ACは以下の環境で動作確認を行っています．
+ D4AC has been tested in the following environments.
 
 - OS: Windows 10 Pro 64bit
   
   Python for Windows 3.9.9
   
-  Google Chrome バージョン: 89.0.4389.114
+  Google Chrome version: 89.0.4389.114
 
 - OS: Windows 11 Pro 64bit
   
   Python for windows 3.10.2
   
-  Google Chrome バージョン：107.0.5304.107
+  Google Chrome version: 107.0.5304.107
 
 - OS: Mac OS 12.6.1 (Apple M1)
   
   Python for Mac 3.9.10
-  Goole Chrome  バージョン：107.0.5304.87
+  Goole Chrome version: 107.0.5304.87
   
 
-ユーザ状態推定結果推定のサービスとして，以下のサービスが利用できます．
+The following services are available for estimating user state estimation results.
 
-- [Face++](https://www.faceplusplus.com/)に対応しています．
-  - 対話参加度，年齢，性別，感情認識に対応しています．
-- [Mediapipe FaceMesh](https://google.github.io/mediapipe/solutions/face_mesh)に対応しています．（Windowsのみ）
-  - 対話参加度のみサポートしてます．
+- [Face++](https://www.faceplusplus.com/).
+  - It corresponds to the degree of dialogue participation, age, gender, and emotion recognition.
 
-PCからChromeブラウザ経由で利用する場合，PCに接続できるカメラ・マイク・スピーカは一般的なものを用いることができます．
+- [Mediapipe FaceMesh](https://google.github.io/mediapipe/solutions/face_mesh). (Windows only)
+  - Only the degree of dialogue participation is supported.
 
-androidのアプリの場合は，モニタ前面のカメラ，内蔵マイク，スピーカーを使用します．
+When using the system from a PC via Chrome browser, any common camera, microphone, and speakers can be connected to the PC.
 
-D4ACのインストールにはインターネット接続が必要です．
+In the case of an Android application, the camera, built-in microphone, and speaker on the front of the monitor are used.
 
-D4ACの技術的な詳細や変更の仕方については，[開発者ドキュメント](docs/developer-document.md)を参照してください．
+An Internet connection is required to install D4AC.
 
-## 注意事項
+Please refer to [developer documentation](docs/developer-document.md) for technical details on D4AC and how to modify it.
 
-D4ACは、ユーザの顔画像や音声を民間企業が管理しているクラウドの画像認識，音声認識システムに送ります。そのため、個人情報漏洩のリスクがあります。D4ACを用いて構築したシステムを使ってもらう際には、ユーザにそのことを伝えたうえで、適切に同意を取るなどをしてください。
+## Notes
 
-また、顔画像から感情を推定して、対話の内容と結びつけることは、使い方によっては、ユーザが意図的に開示していない個人の内面を得るリスクがある。この点に注意した使い方をしてください。
+D4AC sends the user's facial image and voice to a cloud-based image and voice recognition system managed by a private company. Therefore, there is a risk of personal information leakage, and users should be informed of this before using systems built using D4AC, and consent should be obtained appropriately.
 
-## インストール
+In addition, estimating emotions from facial images and linking them to the content of the dialogue may, depending on how it is used, risk gaining an inside view of the individual that is not intentionally disclosed by the user. This should be used with caution.
 
-D4ACをインストールするためには，pythonのインストール，パッケージのインストール，mosquittoのインストール，mosquittoの設定が必要です．
+## Installation
 
-### pythonのインストール
+To install D4AC, you need to install python, install packages, install mosquitto, and configure mosquitto.
 
-pythonのインストール方法は，複数の方法があります．代表的なものを説明します．
+### Installing python
+
+There are several ways to install python. The following is a description of the most common ones.
 
 - Windows
-  [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/) から Python for Windowsをインストールする．
+  Install Python for Windows from   [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/).
 
-  Python for Windows 3.9.9で動作確認をしているが，3.8以上であれば動く可能性がある．
+  We have confirmed that it works with   Python for Windows 3.9.9, but it may work with 3.8 or higher.
 
-  インストール最初の画面の"Add Python 3.x to PATH" をチェックするのを忘れないようにしてください．
+  Remember to check the "Add Python 3.x to PATH" box on the first screen of the installation.
   
 - Mac
 
-  brewをインストールする．
+  Install   brew.
 
-  [https://brew.sh/](https://brew.sh/)参照
+  See  [https://brew.sh/](https://brew.sh/)
 
-  pythonのインストール
+  Installing   python
 
-  macのpython3をbrewでインストールする.
+  Installing python3 on mac with brew.
   
   ```sh
   brew install python-tk
-  ```
+  ````
 
-  `python`ではなく，`python-tk`をインストールしてください．そうでないと，GUIが表示できません．
+  Install `python-tk`,   not `python`. Otherwise, the GUI will not be displayed.
 
-### D4ACパッケージのインストール
+### Install D4AC package
 
-- whlファイルをダウンロードします．
+- Download the whl file.
 
-  [D4ACのページ](https://github.com/nu-dialogue/D4AC) にある `d4ac-x.x.x-py3-none-any.whl` というファイルをクリックし開いたのち，右上の下向き矢印をクリックしてダウンロードしてください．ダウンロードした後，適当なフォルダに移動させてください．
+  Click on the file `d4ac-x.x.x-py3-none-any.whl` on the   [D4AC page](https://github.com/nu-dialogue/D4AC), open it, and then click the down arrow in the upper right corner to download. After downloading, move the file to an appropriate folder.
 
-- パッケージのインストール
+- Install Package
 
-  コマンドプロンプト(macの場合はターミナル)を開き，whlファイルをおいたフォルダに移動し，次のコマンドを入力します．
+  Open a command prompt (terminal on a mac), go to the folder where the whl file is located, and enter the following command
 
   ```sh
-  pip install <ダウンロードしたwhlファイルの名前> 
-  ```
+  pip install <name of downloaded whl file>. 
+  ````
 
-   `<ダウンロードしたwhlファイルの名前> ` の部分はダウンロードしたwhlファイルの名前に置き換えてください．
+   Replace `<name of downloaded whl file> ` with the name of the downloaded whl file.
 
-  pythonのインストール環境によっては，`pip`ではなく`pip3`の場合があります．
+  Depending on your   python installation, it may be `pip3` instead of `pip`.
 
-  上記のコマンドを入力すると，自動的に必要なパッケージをインターネットからダウンロードしてインストールします．
+  Entering the above command will automatically download and install the necessary packages from the Internet.
 
-### mosquittoのインストール
+### Installing mosquitto
 
-ユーザ状態推定結果を使用した対話をするためにmosquittoというMQTTのサービスをインストールする必要があります．
+To interact with the user state estimation results, you need to install the MQTT service called mosquitto.
 
-以下の手順に従って，mosquittoをインストールしてください．
+Follow these steps to install mosquitto.
 
-- Windows の場合
+- For Windows
   
-  [https://mosquitto.org/download/](https://mosquitto.org/download/) からWindows用バイナリをダウンロードしてください．
+  Download binaries for Windows from   [https://mosquitto.org/download/](https://mosquitto.org/download/).
   
-  Binary InstallationのWindowsのところにあります．
+  It is located in the Windows section of   Binary Installation.
   
-  64-bit buildか32-bit buildかはお使いのコンピュータのOSに応じて選択してください．
+  Please select   64-bit or 32-bit build according to your computer's operating system.
 
-  ダウンロードしたファイルをダブルクリック開き，インストールしてください．すべてデフォルトを選ぶので構いません．
+  Double-click the downloaded file to open and install. Select the default settings for everything.
   
-  Windows 10の場合，Ctrlキー，Altキー，Deleteキーを同時に押し，「タスクマネージャ」をクリックしてください．
+  In   Windows 10, press the Ctrl, Alt, and Delete keys simultaneously and click on "Task Manager.
 
-  「サービス」というタブをクリックし，名前がmosquittoのところにカーソルを合わせ，右クリックし．「開始」を選んでください．
+  Click on the "Services" tab, place the cursor over the name mosquitto, right-click, and select "Start". Select "Start".
   
-- macの場合
+- For mac
   
-  以下の手順でインストールし，起動します．
+  Follow the steps below to install and start the software.
   
-  ターミナルを開きます．
+  Open a terminal.
   
-  [brew](https://brew.sh/index_ja)をインストールしていない場合，インターネットよりインストールします．pythonのインストールの項を参照してください．
+  If you have not installed   [brew](https://brew.sh/index_ja), install it from the Internet.
   
-  インストール後，以下を実行します．
+  After installation, perform the following
   
   ```sh
     brew install mosquitto
-  ```
+  ````
   
-  以下のコマンドでmosquittoを起動します．
+  Start mosquitto with the following command.
   
   ```sh
     /opt/homebrew/opt/mosquitto/sbin/mosquitto -c /opt/homebrew/etc/mosquitto/mosquitto.conf
-  ```
+  ````
 
-### Androidを使用する場合のmosquitto の設定
+### Setting up mosquitto when using Android
 
-Androidを使用する場合は，MQTTのインストール設定がPC外部（ネットワーク上のマシン）から接続を許可できないように設定されているので，MQTTの設定を変更してください．Windows の場合，`c:\program files\mosquitto\mosquite.conf`,macの場合は`/opt/homebrew/etc/mosquitto/mosquitto.conf` です．
+If you are using Android, the MQTT installation settings are configured to disallow connections from outside the PC (machines on the network), so please change the MQTT settings: `c:\program files\mosquitto\mosquite.conf` on Windows, `/c:\program files\mosquitto\mosquite.conf` on mac. mosquite.conf` on Windows, or `/opt/homebrew/etc/mosquitto/mosquitto.conf` on mac.
 
-  設定ファイルをテキストエディタ（メモ帳など）で開いて，以下の項目を追加して保存ください．  
+  Open the configuration file with a text editor (e.g. Notepad), add the following items, and save the file.
 
   ```txt
-  listener 1883
+  Listener 1883
   allow_anonymous true
-  ```
+  ````
 
-## 起動
+## Startup
 
-WindowsのコマンドプロンプトまたはMacのターミナルを開き，
+Open a Windows command prompt or a Mac terminal.
 
 ```sh
 d4ac
-```
+````
 
-を入力すると設定画面を起動させることができます．どのディレクトリ（フォルダ）でも構いません．
+You can launch the configuration screen by entering the following command. Any directory (folder) is acceptable.
 
-windowsの場合，以下の手順でショートカットを作成して起動させることができます．
+In the case of windows, you can create a shortcut and launch it by the following procedure.
 
-- 作成したいフォルダにて，右クリック→`新規作成`→`ショートカット`
+- In the folder you want to create, right click -> `New` -> `Shortcut
 
-- ショートカットのウィザード画面が表示されるので，項目の場所に`d4ac`と入力
+- The shortcut wizard screen is displayed, enter `d4ac` in the item location
 
-- `次へ`をクリック，名前を適当に入力して`完了`をクリック．
+- Click `Next`, enter a name and click `Finish`.
 
-そうするとショートカットが作成されるので，次回からはそのショートカットをダブルクリックすることにより実行できます．
+A shortcut is then created and can be executed by double-clicking the shortcut the next time.
 
-### D4ACの設定画面
+### D4AC setup screen
 
-D4ACを起動すると，設定画面が表示されます．そこにて各種設定，システムの起動，終了をすることができます．
+When D4AC is started, the setup screen appears. There, you can configure various settings, start up the system, and close it.
 
-共通項目
+common item
 
-| 内容 | 説明 |
+| Contents | Description
 |-----|------|
-| 設定 | 設定をyamlファイルに書き込みます．設定ボタンをクリックしないと設定内容は反映されません． |
-| 終了 | プログラムを終了します．起動しているD4AC関連プログラムも終了します． |
+| Configuration | Writes the configuration to the yaml file. The settings will not be applied until you click the "Configure" button. | Configuration | Write the configuration to the yaml file.
+| Exit | Exits the program. The running D4AC-related programs are also terminated. | exit
 
-#### User statusタブ
+#### User states tab
 
 ![d4ac1](docs/images/d4ac1.png)
 
-| 内容 | 説明 |
+| Contents | Description
 |-----|------|
-| Camera device ID | カメラのデバイスのIDを表す0以上の整数を入れます． |
-| Recognize speech continuously | システム発話中も含め，音声認識を常時行う場合にチェックを入れます．スピーカーのシステム発話が認識される場合があるので，注意してください．androidアプリでは無効です． |
-| Send at the end of user utterances |ユーザ発話の終了時にユーザ状態推定結果を送信します． |
-| Send at the end of system utterances | システム発話の終了時にユーザ状態推定結果を送信します． |
-| Send between system utterance and user utterance | システム発話が終わった後にユーザが一定時間発話しなかった場合に，ユーザ状態推定結果を送信します． |
-| interval (sec.) | 上記の設定の場合のユーザ状態推定結果の送信タイミング（秒）|
-| Do not send if user status does not change | 上記の場合に，ユーザ状態推定結果が変化しない場合は送信しないようにします． |
-| Send only when requested | システム発話の終了時またはシステム発話が終わった後にユーザが一定期間発話しなかった場合にユーザ状態推定結果を送信する設定になっている場合，対話管理部からのリクエスト（システム発話と同時に送られてきます）にマッチしたときだけユーザ状態推定結果を送信します． |
-| Send gender and age | ユーザ状態推定結果を送信する際に，性別と年齢の推定結果を送信する場合にチェックを入れます． |
+| Camera device ID | An integer greater than or equal to 0 indicating the camera device ID. | Camera device ID
+| Recognize speech continuously | Check this box if you want to perform speech recognition continuously, including during system speech. This checkbox is disabled for android applications. | Check this box if you want to use the system speech recognition continuously, including during the system speech.
+| Send at the end of user utterances. | Send at the end of user utterances
+| Send at the end of system utterances | Send at the end of system utterances
+| Send between system utterance and user utterance | Sends the result of user state estimation when the user has not spoken for a certain period of time after the system utterance has ended. | Send between system utterance and user utterance
+| interval (sec.) | Transmission timing of user state estimation results in the case of the above setting (sec.)
+| Do not send if user status does not change | In the above case, if the result of user status estimation does not change, do not send. | Do not send if user status does not change
+| Send only when requested | If the setting is to send the user state estimation result at the end of system utterance or when the user has not spoken for a certain period of time after the end of system utterance, the user state estimation result is sent only when the request from the dialog management section (sent at the same time as the system utterance) is matched. The user state estimation result is sent only when it matches the request from the dialog management section (which is sent at the same time as the system utterance). | (1)
+| Send gender and age | Check this box if you want to send the gender and age estimation results when sending the user state estimation results. | Send gender and age
 
-#### Dialog serverタブ
+#### Dialog server tab
 
 
 
 ![d4ac2](docs/images/d4ac2.png)
 
-| 内容 | 説明 |
+| Contents | Description
 |-----|------|
-|server_type | サーバタイプを切り替えることができます．現在は`xaiml_sunaba`，`dialbb`，`dummy_dialog`, `test_dialog`が選べます（後述）． |
-| Botid | sunabaを使用している場合のBotid |
-| initTopicId | sunabaを使用している場合の初期topicid|
+|server_type | You can switch the server type. Currently, `xaiml_sunaba`, `dialbb`, `dummy_dialog`, and `test_dialog` are available (see below). |dialog
+| Botid | Botid when using sunaba
+| initTopicId | initial topicid when using sunaba|
 
-#### Amazon Polly TTSタブ
+#### Amazon Polly TTS tab
 
-音声合成をAmazon Polyを用いて行うための設定です．
+This is the setup for voice synthesis using Amazon Poly.
 
-identity PoolIdとregionを設定します。これらを取得するには、AWSのアカウントの取得と設定が必要で、その方法は[このページ](https://docs.aws.amazon.com/ja_jp/sdk-for-javascript/v2/developer-guide/getting-started-browser.html)に載っていますが、技術知識が必要なので、詳しい人に聞いてください。
+identity PoolId and region. To obtain these, you will need to obtain and set up an AWS account, which can be found on [this page](https://docs.aws.amazon.com/ja_jp/sdk-for-javascript/v2/developer-guide/getting- started-browser.html), but it requires technical knowledge, so please ask someone familiar with the subject.
 
 ![d4ac3](docs/images/d4ac3.png)
 
-| 内容 | 説明 |
+| Contents | Description
 |-----|------|
-| identityPoolId | amazon pollyのidentityPoolId|
-| region |  amazon pollyのregion|
+| identityPoolId | identityPoolId of amazon polly|
+| region | amazon polly's region|
 
-#### Post to external serverタブ
+#### Post to external server tab
 
-対話サーバ処理結果を外部サーバに送信する設定を行います．
+Configure the dialog server to send the processing results to an external server.
 
 ![d4ac4](docs/images/d4ac4.png)
 
-| 内容 | 説明 |
+| Contents | Description
 |-----|------|
-| 対話サーバ処理結果を外部サーバに送信 | 対話サーバ処理結果を外部サーバに送信するかどうかのフラグ．外部サーバを使用しない場合はオフにしてください． |
-| 外部サーバURL | 外部サーバ送信先URL|
+| Flag indicating whether or not to send the results of the dialog server processing to an external server. If you do not use an external server, turn it off. | send results to external server.
+| external server URL | external server destination URL|
 
-#### Face++タブ
+#### Face++ tab
 
 ![d4ac5](docs/images/d4ac5.png)
 
-| 内容 | 説明 |
+| Contents | Description
 |-----|------|
-| API key | Face++のAPI keyを入力します． |
-| API Secret | Face++のAPI Secret入力します． |
+| API key | Enter the API key for Face++. | Enter the API key of Face++.
+| API Secret | Enter the API Secret for Face++. | API Secret
 
-Face++のAPI Key, API Secretの取得方法については，[ここ](docs/facepp.md)を見てください．
+See [here](docs/facepp.md) for information on how to obtain the API Key and API Secret for Face++.
 
-#### Start processesタブ
+#### Start processes tab
 
-モジュールを起動します．
+Starts the module.
 
 ![d4ac6](docs/images/d4ac6.png)
 
-| 内容 | 説明 |
+| Contents | Description
 |-----|------|
-| IP address of this PC | Androidアプリが接続するときのIPアドレスです．androidアプリで接続するときに参考にしてください．|
-| Path of D4AC package | 実行しているD4ACパッケージの保存先パスです．対話中のイメージを保存するときに参考にしてください．|
-| dialog_server | dialog_server（対話サーバ）を起動，終了します． |
-| d4ac_main | d4ac_main（メインプログラム）を起動，終了します． |
-| video_input | video_input（カメラ画像入力）を起動，終了します．Chromeの時のみ使用してください． |
-| face++ | face++（Face++ ユーザ状態推定）を起動，終了します． |
-| mediapipe | mediapipe（mediapipeユーザ状態推定）を起動，終了します．（windowsのみ使用可能） |
-| userstatus | userstatus（mediapipeの結果から対話参加度を推定するモジュール）を起動，終了します． |
+| IP address of this PC | This is the IP address that the Android application uses to connect to the PC. | IP address of this PC
+| Path of D4AC package | The destination path of the D4AC package you are running. This is the path to the D4AC package where you want to save the interactive image. | Path of D4AC package
+| dialog_server | Starts and stops the dialog_server (dialog server). | dialog_server
+| d4ac_main | Starts and exits d4ac_main (main program). | d4ac_main
+| video_input | start/stop video_input (camera image input) Use only in Chrome. | video_input
+| face++ (Face++ user state estimation) is started and terminated. | face++ (Face++ user state estimation)
+| mediapipe | Start and exit mediapipe (mediapipe user state estimation). (available for windows only) |
+| userstatus | userstatus (a module that estimates dialogue participation from mediapipe results) is started and terminated. | userstatus
 
-各プログラムを起動すると，画面上に`running`と表示されます．起動中のプログラムは`stop`ボタンで停止できます．
+When each program is started, `running` is displayed on the screen. The running program can be stopped by pressing the `stop` button.
 
-### システム起動
+### System startup
 
-- Chromeを使用する場合
+- When using Chrome
 
-  設定画面のStart processesタブを選び，そこから必要なプロセスを起動してください．
+  Select the Start processes tab on the configuration screen and start the necessary processes from there.
 
-  dialog_server, d4ac_mainは必ず起動してください．
+  dialog_server and d4ac_main must be started.
 
-  画像情報からユーザ状態推定を行う場合は， video_inputを起動し，さらに，face++， mediapipe (Windowsのみ)のどれかを起動してください．画像入力の画面が立ち上がるまでかなり時間がかかります（1分程度）
+  To perform user state estimation from image information, start video_input and then either face++ or mediapipe (Windows only). It takes quite a while (about 1 minute) for the image input screen to appear.
 
-  mediapipeを用いる場合は，userstatusも起動してください．
+  When using mediapipe, userstatus must also be activated.
 
-  起動後，chromeを実行し，`http://localhost:8000/` に接続すると，画面にmenuが現れます．
+  After launching, run chrome and connect to `http://localhost:8000/`, a menu will appear on the screen.
 
-  | 内容 | 説明 |
+  | Contents | Description
   |-----|------|
-  |Chrome Speech Synthesis| Chrome音声合成を使用する音声対話モードになります．（最初はこれが選ばれています）|
-  | Amazon Polly |Amazon Polly音声合成を使用する音声対話モードになります．|
-  | Text IO |テキスト入出力のモードになります．|
+  |Chrome Speech Synthesis| This will be the spoken dialogue mode that uses Chrome Speech Synthesis. (This is selected initially.) |Chrome Speech Synthesis
+  |Amazon Polly |Enables spoken dialogue mode using Amazon Polly speech synthesis. |Amazon Polly
+  |Text IO |Text input/output mode. |Text IO
 
-  Utterance画面で「Start Dialog」をクリックすると対話が始まりますので，音声発話またはテキスト入力でシステムと対話してください．
+  Click "Start Dialog" on the   Utterance screen to start the dialogue.
 
-  Text IO画面ではユーザ状態推定結果の送信はできません．
+  User state estimation results cannot be sent on the   Text IO screen.
 
-  対話を再開したい場合は，ブラウザのリロードボタンを押してください．
+  To resume the dialogue, press the reload button on your browser.
 
-- android D4ACクライアントアプリをChromeのかわりにフロントエンドで使用する場合
+- If you want to use the android D4AC client app on the front end instead of Chrome
 
-  - あらかじめapkファイルをandroidにインストールします．（OSによってインストール方法が違いますので，androidのOSの設定を確認願います．）
-  - 顔画像の取得はandroid D4ACクライアントアプリが行い，PC側のユーザ状態推定結果のプログラムに顔画像データ送信を行いますので，上記の起動方法のvideo_inputは起動しません．
-  - android端末をwifi等でD4ACを動作させているPCと同じネットワークに参加させます．参加方法ネットワーク管理者に確認してください．
-  - Windowsにアンチウィルスソフト等のファイアーウオールが設定されていると，MQTTのネットワークに外部から接続できません．一時的に解除するか，MQTTのポート1883を外部からアクセスできるように設定を変更してください．
+  - Install the apk file on your android. (The installation method differs depending on the OS, so please check the settings of your android OS.)
+  - The android D4AC client application acquires the face image and sends the face image data to the user state estimation result program on the PC side, so the video_input of the above activation method is not activated.
+  - Connect the   android device to the same network as the PC running D4AC via wifi, etc. Please ask your network administrator how to join the network.
+  - If your   Windows is configured with a firewall such as anti-virus software, you will not be able to connect to the MQTT network from outside. Please disable it temporarily or change the setting so that MQTT port 1883 can be accessed from the outside.
 
-    D4ACのGUIのシステム起動のこのPCのIPアドレスに表示されるのカンマで区切られた４つの数字をメモしてください．この値は変わる可能性があるため，android接続前に確認してください.
-    そのIPで接続できない場合や，よくわからない場合は，システム管理者にネットワークの設定を確認してIPアドレス情報を取得してください．
+    Note the four numbers separated by commas that appear in the IP address of this PC in the D4AC GUI's system startup. This value may change, so please check it before connecting to android.
+    If you cannot connect with that IP or are not sure, check the network settings with your system administrator to obtain IP address information.
 
-  - androidでd4ac applicationを起動します．
-  - セキュリティの警告が出た場合は，すべて許可してください．
-  - 以下のような画面が表示されるので，settingsを押します．
+  - Launch the d4ac application on android.
+  - All security warnings should be allowed.
+  - The following screen is displayed.
 
   ![Main](docs/images/Screenshot_main.png)
 
-  - 次の画面が表示されます．
+  - The following screen will appear.
 
   ![Settings](docs/images/Screenshot_setting.png)
 
-  - Server address に上記のIPV4アドレスを入力（半角文字列）してください．
-  - Server http port には 8000を入力します．
-  - 一度入力したら戻るボタンでアプリを終了し，もう一度立ち上げてください．正常に設定された場合は，Startボタンが押せるようになります．
-  - Startボタンを押すと，顔画像が表示され，音声入力状態になるので，顔を表示しながら対話をしてください．
-  - アプリは戻るボタンを押すと終了できます．
+  - Enter the above IPV4 address in the   Server address field.
+  - Enter 8000 for the   Server http port.
+  - Once you have entered the information, click the Back button to exit the application and reopen it. If the setting is successful, you will be able to press the Start button.
+  - Press the   Start button to display the face image and enter the voice input state.
+  - The application can be closed by pressing the Back button.
 
-## 終了
+## Ended
 
-D4ACアプリケーションの`システム起動`タブで，実行中のプログラムを個別に終了するか，設定画面の左下の終了`ボタンをクリックすると，システムは終了されます．
+In the `System Startup` tab of the D4AC application, exit the running programs individually, or click the `Exit` button in the lower left corner of the setup screen.
 
-## 対話サーバとの通信
+## Communicate with Dialogue Server
 
-### 対話サーバのサーバタイプ
+### Server Type of Interactive Server
 
-対話サーバのタイプは`xaiml_sunaba`，`dialbb`，`dummy_dialog`, `test_dialog`が選べます．
+You can choose from `xaiml_sunaba`, `dialbb`, `dummy_dialog`, or `test_dialog` as the dialog server type.
 
-- xaiml_sunabaはNTT Docomoの[xAIML-SUNABA](https://docs.sunaba.docomo.ne.jp/)を対話サーバとして使うものです．
+- xaiml_sunaba uses NTT Docomo's [xAIML-SUNABA](https://docs.sunaba.docomo.ne.jp/) as a dialog server.
 
-- dialbbはC4A研究所の[DialBB]()を対話サーバとして使うものです．今後記述していきます．
-- dummy_dialogはおおむ返しをする対話管理部を用います．動作確認用です．
-- test_dialogは開発者のテスト用なので，通常は使いません．
+- dialbb uses [DialBB]() of C4A Laboratory as a dialog server. It will be described in the future.
+- dummy_dialog uses a dialog management section that returns a large portion of the dialog. This is for checking the operation.
+- test_dialog is for developer testing and is not normally used.
 
-### 各タイプのサーバの設定
+### Configure each type of server
 
 - xAIML SUNABA
-  - xAIML SUNABAのアプリケーションを動かしたのち，D4ACの設定画面のDialog serverタブでbotIDとinitTopicIDを設定します．
-    これらについては[xAIML-SUNABAのドキュメント](https://docs.sunaba.docomo.ne.jp/documentation/)を参照してください．
+  - After running the xAIML SUNABA application, set the botID and initTopicID in the Dialog server tab of the D4AC configuration screen.
+    Please refer to [xAIML-SUNABA documentation](https://docs.sunaba.docomo.ne.jp/documentation/) for more information on these.
 - DialBB
-  - DialBBのwebアプリケーションをポート番号`8081`で動作させておきます．（DialBBのデフォルトのポート番号とは異なることに注意してください．）
+  - Run the DialBB web application on port number `8081`. (Note that this is different from the DialBB default port number.)
 
-### ユーザ状態推定結果取得結果の送信
+### Transmission of user state estimation result acquisition result
 
-ユーザ状態は以下の4種類です．
+There are four types of user states
 
-| 種類       | 値                                                           |
+| Type | Value
 | ---------- | ------------------------------------------------------------ |
-| engagement | "high", "middle", or "low"                                   |
-| emotion    | "anger", "disgust", "fear", "happiness", "neutral", "sadness", or "surprise" |
+| engagement | "high", "middle", or "low" | "high", "middle", or "low" | "low
+| "anger", "disgust", "fear", "happiness", "neutral", "sadness", or "surprise".
 | age        | "child", "teenager", "young", "middle", "senior", or "unknown" |
-| gender     | "male" or "female"                                           |
+| gender | "male" or "female" |
 
-#### xAIML-SUNABAの場合
+#### For xAIML-SUNABA
 
-ユーザ状態推定結果は以下の形式で送られます．
+The user state estimation results are sent in the following format
 
-- ユーザ発話終了時：ユーザ発話の後に付加して送ります．
+- At the end of user speech: The message is sent after the user speech.
 
-  ```
-  こんにちは+{engagement:high}{emotion:happiness} # ユーザ発話終了時にユーザ発話と同時に送信
-  こんにちは+{engagement:high}{gender:male}{age:child} # ユーザ発話終了時にユーザ発話と同時に送信（gender, ageも送る場合）
-  ```
+  ````
+  hello+{engagement:high}{emotion:happiness} # Send at the same time as user speech at the end of user speech
+  hello+{engagement:high}{gender:male}{age:child} # Send at the same time as user speech at the end of user speech (when gender and age are also sent)
+  ````
 
-- システム発話終了時：su-endの後ろに+をつけてユーザ状態推定結果を表示します．
+- At the end of system utterance: display the result of user state estimation with a + after su-end.
 
-  ```
-  su-end+{engagement:high}{emotion:happiness} # システム発話終了時に送信
+  ````
+  su-end+{engagement:high}{emotion:happiness} # Send at the end of system speech
   su-end+{emotion:happiness}
-  ```
+  ````
 
-- システム発話の終了後ユーザ発話までの間は，silenceの後ろに+をつけてユーザ状態推定結果を表示します．
+- After the end of the system utterance and until the user utterance, the user state estimation result is displayed with + after the silence.
 
-  ```
-  silence+{engagement:middle}{emotion:anger} # システム発話終了後の無言区間に送信
+  ````
+  silence+{engagement:middle}{emotion:anger} # Send during silence interval after system speech ends
   silence+{engagement:low}
-  ```
+  ````
 
-  ユーザ状態推定結果は必ずengagement, emotion, gender, ageの順です．
+  User state estimation results are always in the order of engagement, emotion, gender, and age.
 
-#### DialBBの場合
+#### For DialBB
 
-ユーザ状態推定結果はDialBBサーバへのリクエストの`”aux_data”`に以下の形式で入れられて送られます．
+The result of the user state estimation is sent in the `"aux_data"` of the request to the DialBB server in the following format.
 
 ```json
 {
-    "engagement": "high",
-    "emotion": "happiness",
-    "gender": "male",
+    "engagement": "high", "engagement".
+    "emotion": "happiness",.
+    "gender": "male", "gender".
     "age": "child"
 }
-```
+````
 
-DialBBのアプリがSTN Manager組み込みブロックを用いている場合，シナリオの中で，`#engagement`, `#emotion`などで参照できます．
+If your DialBB app uses the STN Manager built-in block, you can refer to it in your scenario as `#engagement`, `#emotion`, etc.
 
-システム発話終了時や，システム発話の終了後ユーザ発話までの間は，リクエストの`"user_utterance"`の値は`""` (空文字列)になります．
+The value of `"user_utterance"` in the request is `""` (empty string) at the end of the system utterance or between the end of the system utterance and the user utterance.
 
-### 対話中の画像表示
+### Displaying images during dialogue
 
-システム発話文字列の最後に"(<画像ファイル名>)"がある場合，画像フォルダ中の当該画像ファイルを表示します．D4ACアンドロイドクライアントでも表示されます．画像フォルダは，D4ACシステムフォルダの中の，`d4ac_main`フォルダの中の`static`フォルダの中の`image`フォルダです．D4ACシステムのフォルダは，D4AC GUIの`Start process`タブの中に表示されています．
+If the system speech string ends with "(<image filename>)", the relevant image file in the image folder is displayed, also in the D4AC android client. The image folder is the `image` folder in the `static` folder in the `d4ac_main` folder in the D4AC system folder, which is displayed in the `Start process` tab of the D4AC GUI.
 
-例：システム発話が`"それは面白い (oowarai_man.png)"` ならば，`{D4ACシステムのフォルダ名}\d4ac_main\static\images\oowarai_man.png`を表示します．
+Example: If the system speech is `"That's interesting (oowarai_man.png)`, then `{D4AC system folder name}\d4ac_main\static\images\oowarai_man.png` is displayed.
 
 
-### システムに発話させない方法
+### How not to let the system speak
 
-システムに何も発話させたくない場合，対話サーバの応答のシステム発話に`"empty"`を指定してください．
+If you do not want the system to speak anything, specify `"empty"` for system speech in the dialog server response.
 
-### ユーザ状態推定結果の送信リクエスト
+### Request to send user state estimation results
 
-設定画面のUser statusタブの"Send only when requested"にチェックが入っている場合，システム発話終了後およびシステム発話終了後ユーザ発話が開始されるまでの間のユーザ状態推定結果の送信は，対話サーバからのリクエストにマッチしたときのみ実行されます．
+If "Send only when requested" is checked in the User status tab of the configuration screen, the sending of user status estimation results after the end of system speech and before the start of user speech after the end of system speech is performed only when a request from the dialog server is matched. The transmission of user state estimation results after the end of system speech and before the start of user speech is performed only when a request from the dialog server matches.
 
-リクエストはシステム発話文字列の後に以下の形式で書きます．
+The request is written after the system speech string in the following format.
 
-```
-[<種類>:<値>]
-```
+````
+[<type>:<value>].
+````
 
-種類は `emotion`, `engagement`,`age`, `gender`のどれか，または，複数を`emotion|age`のように連結したものです．です．また，値はユーザ状態の値を`|`で区切って並べたものです．
+The type is one of `emotion`, `engagement`, `age`, `gender`, or several of them concatenated as `emotion|age`. The value is a user state value. The value is a list of user state values separated by `|`.
 
-例えば，`happiness|sadness|low`や`anger`のような感じです．
+For example, `happiness|sadness|low` or `anger`.
 
-一例として，
+As an example, the
 
-```
-今日の気分はいかがですか？ [emotion|engagement: happiness|sadness|high]
-```
+````
+How are you feeling today? [emotion|engagement: happiness|sadness|high]
+````
 
-のようなシステム発話文字列をxAIML-SUNABAから送ることでリクエストできます．音声合成や画面表示にはこのリクエスト部分は用いられません．
-このあとシステム発話終了後，emotionがhappinessかsadnessになったときだけ，対話サーバに
+The request can be made by sending a system speech string from xAIML-SUNABA such as This request part is not used for speech synthesis or screen display.
+After this, only when the emotion becomes happiness or sadness after the system speech ends, the dialog server is notified
 
-```
+````
 su-end+{emotion:happiness}
 silence+{engagement:sadness}
-```
+````
 
-などが送られます．それ以外の場合は何も送られません．
+Otherwise, nothing is sent. 
 
-## 対話サーバからの出力の外部サーバへの送信（上級者向け）
+## Send output from dialogue server to external server (for advanced users)
 
-dialog_serverからの返答を外部サーバに転送し，結果をユーザに返答することができます．
+The response from dialog_server can be forwarded to an external server and the results returned to the user.
 
-指定したURLの外部サーバにPOSTメソッドで次のような形のJSON形式で送信します．
+Sends the JSON format in the following form to an external server at the specified URL using the POST method.
 
 ```json
 {
-  "systemUtterance":{"expression": system_utterance, "utterance": system_utterance},
-  "talkend": false,
-  "timestamp": <タイムスタンプの文字列>
+  "systemUtterance":{"expression": system_utterance, "utterance": system_utterance}
+  "talkend": false,.
+  "timestamp": <string of timestamp>.
 }
 
-```
+````
 
-外部サーバの実装（おうむ返し）のサンプルコードは，`src/sampleExtServer/urls.py`の`dummyResponse` にあります．おおむ返しなので，実行して設定しても何も変化がありません.
+The sample code for the external server implementation (omuResponse) is in `dummyResponse` in `src/sampleExtServer/urls.py`. Since it is a dummy response, there is no change even if you execute and configure it.
 
-外部サーバを使用する場合は，`dummyResponse`をもとにカスタマイズされた外部サーバを立ててください．
+When using an external server, set up a customized external server based on `dummyResponse`.
 
-使用しない場合は外部サーバ送信機能をオフにしないと正常に動作しません．
+If not used, the external server transmission function must be turned off for proper operation.
 
-## 謝辞
+## Acknowledgements
 
-D4ACの開発に当たっては，[名古屋大学 卓越大学院プログラムライフスタイル革命のための超学際移動イノベーション人材養成学位プログラム（TMIプログラム）](https://www.tmi.mirai.nagoya-u.ac.jp/)の支援を受けました．関係各位に感謝します．
+The development of D4AC was supported by [Graduate Program for Lifestyle Revolution based on Transdisciplinary Mobility Innovation  (TMI Program)](https://www.tmi.mirai.nagoya-u.ac.jp/en/). We would like to express our gratitude to all parties involved.
 
-## 引用
+## Quote
 
-D4ACを利用した結果をpublishされる場合には以下の文献を引用ください．
+Please cite the following references when publishing results using D4AC.
 
-- 中野 幹生, 東中 竜一郎, [D4AC: 異分野連携のためのマルチモーダル対話システム構築ツール](https://www.jstage.jst.go.jp/article/jsaislud/99/0/99_172/_article/-char/ja), 人工知能学会研究会資料 言語・音声理解と対話処理(SLUD)研究会, vol. 99, pp. 172-177, 2023
+- Mikio Nakano and Ryuichiro Higashinaka, [D4AC: A Multi-modal Dialogue System Development Tool for Interdisciplinary Collaboration](https://www.jstage.jst.go.jp/article/jsaislud/99/0/99_172/_article/-char/ja), JSAI SIG-SLUD, vol. 99, pp. 172-177, 2023 (in Japanese)
 
-## ライセンス
+## License
 
 [Apache 2.0](LICENSE)
 
-## 問い合わせ先
+## Contact
 
-Email: `d4ac` at `ds.is.i.nagoya-u.ac.jp`
+Email: `d4ac` at `ds.is.i.nagoya-u.ac.jp`.
 
-## 著作権
+## Copyright
 
-Copyright 2023 Nagoya University
+Copyright, Nagoya University
