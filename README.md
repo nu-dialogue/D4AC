@@ -11,9 +11,9 @@ D4AC (Dialogue for All-Client) is a client (multimodal input/output part) of D4A
 It works as a client of the dialog server built and operated by NTT DoCoMo's [xAIML SUNABA](https://docs.xaiml.docomo-dialog.com/#) or C4A Research Institute, Inc.'s [DialBB](https://github.com/c4a-ri/dialbb). 
 
 After lauching the dialog server and D4AC, you can connect to D4AC from Chrome on the PC where D4AC is running or an Android device.
-(Currently, we do not distribute an application for Android. If you need it, please contact the developer.)
+(Currently, we do not distribute an application for Android. If you need it, please contact us.)
 
-It is possible to create a dialogue system that changes its behavior depending on the level of dialogue participation estimated from the recognition results of the user's face image, or on the user's state.
+It is possible to create a dialogue system that changes its behavior depending on the engagement level estimated from the recognition results of the user's facial image, or on the user's state.
 
  D4AC has been tested in the following environments.
 
@@ -33,7 +33,6 @@ It is possible to create a dialogue system that changes its behavior depending o
   
   Python for Mac 3.9.10
   Goole Chrome version: 107.0.5304.87
-  
 
 The following services are available for estimating user state estimation results.
 
@@ -49,7 +48,7 @@ In the case of an Android application, the camera, built-in microphone, and spea
 
 An Internet connection is required to install D4AC.
 
-Please refer to [developer documentation](docs/developer-document.md) for technical details on D4AC and how to modify it.
+Please refer to [developer documentation](docs/developer-document.md) (currently only in Japanese) for technical details on D4AC and how to modify it.
 
 ## Notes
 
@@ -66,77 +65,74 @@ To install D4AC, you need to install python, install packages, install mosquitto
 There are several ways to install python. The following is a description of the most common ones.
 
 - Windows
-  Install Python for Windows from   [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/).
-
-  We have confirmed that it works with   Python for Windows 3.9.9, but it may work with 3.8 or higher.
-
-  Remember to check the "Add Python 3.x to PATH" box on the first screen of the installation.
+  
+  - Install Python for Windows from   [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/).
+  
+  - We have confirmed that it works with Python for Windows 3.9.9, but it may work with 3.8 or higher.
+  
+  - Remember to check the "Add Python 3.x to PATH" box on the first screen of the installation.
   
 - Mac
 
-  Install   brew.
-
-  See  [https://brew.sh/](https://brew.sh/)
-
-  Installing   python
-
-  Installing python3 on mac with brew.
+  - Installing brew
+  - See  [https://brew.sh/](https://brew.sh/)
   
-  ```sh
-  brew install python-tk
-  ````
-
-  Install `python-tk`,   not `python`. Otherwise, the GUI will not be displayed.
+- Installing   python
+  
+  - Installing Python3 on Mac with brew.
+  
+    ```sh
+    	brew install python-tk
+    ```
+  
+- Install `python-tk`,   not `python`. Otherwise, the GUI will not be displayed.
 
 ### Install D4AC package
 
-- Download the whl file.
+- Downloading the whl file.
 
-  Click on the file `d4ac-x.x.x-py3-none-any.whl` on the   [D4AC page](https://github.com/nu-dialogue/D4AC), open it, and then click the down arrow in the upper right corner to download. After downloading, move the file to an appropriate folder.
+  - Click on the file `d4ac-x.x.x-py3-none-any.whl` on the   [D4AC page](https://github.com/nu-dialogue/D4AC), open it, and then click the down arrow in the upper right corner to download. After downloading, move the file to an appropriate folder.
 
-- Install Package
+- Installing packages
 
-  Open a command prompt (terminal on a mac), go to the folder where the whl file is located, and enter the following command
+  Open a command prompt (terminal on a mac), go to the folder where the whl file is located, and enter the following command.
 
   ```sh
   pip install <name of downloaded whl file>. 
   ````
 
-   Replace `<name of downloaded whl file> ` with the name of the downloaded whl file.
+  - Replace `<name of downloaded whl file> ` with the name of the downloaded whl file.
 
-  Depending on your   python installation, it may be `pip3` instead of `pip`.
+  - Depending on your Python installation, it may be `pip3` instead of `pip`.
 
-  Entering the above command will automatically download and install the necessary packages from the Internet.
+  - Entering the above command will automatically download and install the necessary packages from the Internet.
 
 ### Installing mosquitto
 
-To interact with the user state estimation results, you need to install the MQTT service called mosquitto.
+To engage in a dialogue using user state estimation results, you need to install the MQTT service called mosquitto.
 
-Follow these steps to install mosquitto.
+Follow the steps below to install mosquitto.
 
-- For Windows
+- Windows
   
-  Download binaries for Windows from   [https://mosquitto.org/download/](https://mosquitto.org/download/).
+  - Download binaries for Windows from   [https://mosquitto.org/download/](https://mosquitto.org/download/)
   
-  It is located in the Windows section of   Binary Installation.
+    - It is located in the Windows section of Binary Installation.
   
-  Please select   64-bit or 32-bit build according to your computer's operating system.
+    - Please select  64-bit or 32-bit build according to your computer's operating system.
 
-  Double-click the downloaded file to open and install. Select the default settings for everything.
+  - Double-click the downloaded file to open and install. It is okay to select the default settings for everything.
   
-  In   Windows 10, press the Ctrl, Alt, and Delete keys simultaneously and click on "Task Manager.
+  - Press the Ctrl, Alt, and Delete keys simultaneously and click on "Task Manager".
 
-  Click on the "Services" tab, place the cursor over the name mosquitto, right-click, and select "Start". Select "Start".
+  - Click on the "Services" tab, place the cursor over the name mosquitto, right-click, and select "Start". Select "Start".
   
-- For mac
+- Mac
   
-  Follow the steps below to install and start the software.
-  
-  Open a terminal.
-  
-  If you have not installed   [brew](https://brew.sh/index_ja), install it from the Internet.
-  
-  After installation, perform the following
+  - Follow the steps below to install and start the software.
+  - Open a terminal.
+  - If you have not installed   [brew](https://brew.sh/index_ja), install it from the Internet.
+  - After installation, perform the following
   
   ```sh
     brew install mosquitto
@@ -148,11 +144,9 @@ Follow these steps to install mosquitto.
     /opt/homebrew/opt/mosquitto/sbin/mosquitto -c /opt/homebrew/etc/mosquitto/mosquitto.conf
   ````
 
-### Setting up mosquitto when using Android
+### Setting up Mosquitto when using Android
 
-If you are using Android, the MQTT installation settings are configured to disallow connections from outside the PC (machines on the network), so please change the MQTT settings: `c:\program files\mosquitto\mosquite.conf` on Windows, `/c:\program files\mosquitto\mosquite.conf` on mac. mosquite.conf` on Windows, or `/opt/homebrew/etc/mosquitto/mosquitto.conf` on mac.
-
-  Open the configuration file with a text editor (e.g. Notepad), add the following items, and save the file.
+If you are using Android, open`/c:\program files\mosquitto\mosquite.conf` on Windows, or `/opt/homebrew/etc/mosquitto/mosquitto.conf` on Mac with a text editor (e.g. Notepad), add the following items, and save the file.
 
   ```txt
   Listener 1883
@@ -161,50 +155,40 @@ If you are using Android, the MQTT installation settings are configured to disal
 
 ## Startup
 
-Open a Windows command prompt or a Mac terminal.
+Open a Windows command prompt or a Mac terminal, and type the following.
 
 ```sh
 d4ac
 ````
 
-You can launch the configuration screen by entering the following command. Any directory (folder) is acceptable.
-
-In the case of windows, you can create a shortcut and launch it by the following procedure.
-
-- In the folder you want to create, right click -> `New` -> `Shortcut
-
-- The shortcut wizard screen is displayed, enter `d4ac` in the item location
-
-- Click `Next`, enter a name and click `Finish`.
-
-A shortcut is then created and can be executed by double-clicking the shortcut the next time.
+Then you can launch the configuration screen by entering the following command. You can type the command in any directory (folder) .
 
 ### D4AC setup screen
 
 When D4AC is started, the setup screen appears. There, you can configure various settings, start up the system, and close it.
 
-common item
+#### Common items
 
-| Contents | Description
+| Button | Description|
 |-----|------|
-| Configuration | Writes the configuration to the yaml file. The settings will not be applied until you click the "Configure" button. | Configuration | Write the configuration to the yaml file.
-| Exit | Exits the program. The running D4AC-related programs are also terminated. | exit
+| Save | Writes the configuration to the YAML file. The settings will not be applied until you click this button. |
+| Close | Exits the program. The running D4AC-related programs are also terminated. |
 
 #### User states tab
 
 ![d4ac1](docs/images/d4ac1.png)
 
-| Contents | Description
+| Item | Description|
 |-----|------|
-| Camera device ID | An integer greater than or equal to 0 indicating the camera device ID. | Camera device ID
-| Recognize speech continuously | Check this box if you want to perform speech recognition continuously, including during system speech. This checkbox is disabled for android applications. | Check this box if you want to use the system speech recognition continuously, including during the system speech.
-| Send at the end of user utterances. | Send at the end of user utterances
-| Send at the end of system utterances | Send at the end of system utterances
-| Send between system utterance and user utterance | Sends the result of user state estimation when the user has not spoken for a certain period of time after the system utterance has ended. | Send between system utterance and user utterance
-| interval (sec.) | Transmission timing of user state estimation results in the case of the above setting (sec.)
-| Do not send if user status does not change | In the above case, if the result of user status estimation does not change, do not send. | Do not send if user status does not change
-| Send only when requested | If the setting is to send the user state estimation result at the end of system utterance or when the user has not spoken for a certain period of time after the end of system utterance, the user state estimation result is sent only when the request from the dialog management section (sent at the same time as the system utterance) is matched. The user state estimation result is sent only when it matches the request from the dialog management section (which is sent at the same time as the system utterance). | (1)
-| Send gender and age | Check this box if you want to send the gender and age estimation results when sending the user state estimation results. | Send gender and age
+| Camera device ID | An integer greater than or equal to 0 indicating the camera device ID. |
+| Recognize speech continuously | Check this box if you want to perform speech recognition continuously, including during system speech. This checkbox is disabled for Android applications. |
+| Send at the end of user utterances. | Send the user state estimation results at the end of user utterances. |
+| Send at the end of system utterances | Send the user state estimation results at the end of system utterances. |
+| Send between system utterance and user utterance | Sends the result of user state estimation when the user has not spoken for a certain period of time after the system utterance has ended. |
+| interval (sec.) | Transmission timing of user state estimation results in the case of the above setting (sec.)|
+| Do not send if user states does not change | In the above case, if the result of user states estimation does not change, do not send. |
+| Send only when requested | If the setting is to send the user state estimation result at the end of system utterance or when the user has not spoken for a certain period of time after the end of system utterance, the user state estimation result is sent only when the request from the dialog management section (sent at the same time as the system utterance) is matched. The user state estimation result is sent only when it matches the request from the dialog management section (which is sent at the same time as the system utterance). |
+| Send gender and age | Send the gender and age estimation results when sending the user state estimation results. |
 
 #### Dialog server tab
 
@@ -212,21 +196,25 @@ common item
 
 ![d4ac2](docs/images/d4ac2.png)
 
-| Contents | Description
+| Item | Description|
 |-----|------|
-|server_type | You can switch the server type. Currently, `xaiml_sunaba`, `dialbb`, `dummy_dialog`, and `test_dialog` are available (see below). |dialog
-| Botid | Botid when using sunaba
+|server_type | You can switch the server type. Currently, `xaiml_sunaba`, `dialbb`, `dummy_dialog`, and `test_dialog` are available (see below). |
+| Botid | Botid when using sunaba|
 | initTopicId | initial topicid when using sunaba|
 
 #### Amazon Polly TTS tab
 
-This is the setup for voice synthesis using Amazon Poly.
+This is for the setup for speech synthesis using Amazon Polly.
 
 identity PoolId and region. To obtain these, you will need to obtain and set up an AWS account, which can be found on [this page](https://docs.aws.amazon.com/ja_jp/sdk-for-javascript/v2/developer-guide/getting- started-browser.html), but it requires technical knowledge, so please ask someone familiar with the subject.
 
+Currently only Japanese male voice (Takumi) can be used. 
+
+
+
 ![d4ac3](docs/images/d4ac3.png)
 
-| Contents | Description
+| Item | Description|
 |-----|------|
 | identityPoolId | identityPoolId of amazon polly|
 | region | amazon polly's region|
@@ -237,38 +225,38 @@ Configure the dialog server to send the processing results to an external server
 
 ![d4ac4](docs/images/d4ac4.png)
 
-| Contents | Description
+| Item | Description|
 |-----|------|
-| Flag indicating whether or not to send the results of the dialog server processing to an external server. If you do not use an external server, turn it off. | send results to external server.
-| external server URL | external server destination URL|
+| Post dialog server outputs to the external server | Whether to send dialogue server outputs to external server. |
+| External server URL | External server destination URL |
 
 #### Face++ tab
 
 ![d4ac5](docs/images/d4ac5.png)
 
-| Contents | Description
+| Item | Description|
 |-----|------|
-| API key | Enter the API key for Face++. | Enter the API key of Face++.
-| API Secret | Enter the API Secret for Face++. | API Secret
+| API key | tAPI key for Face++. |
+| API Secret | API Secret for Face++. |
 
 See [here](docs/facepp.md) for information on how to obtain the API Key and API Secret for Face++.
 
 #### Start processes tab
 
-Starts the module.
+Starts the modules.
 
 ![d4ac6](docs/images/d4ac6.png)
 
-| Contents | Description
+| Item | Description|
 |-----|------|
-| IP address of this PC | This is the IP address that the Android application uses to connect to the PC. | IP address of this PC
-| Path of D4AC package | The destination path of the D4AC package you are running. This is the path to the D4AC package where you want to save the interactive image. | Path of D4AC package
-| dialog_server | Starts and stops the dialog_server (dialog server). | dialog_server
-| d4ac_main | Starts and exits d4ac_main (main program). | d4ac_main
-| video_input | start/stop video_input (camera image input) Use only in Chrome. | video_input
-| face++ (Face++ user state estimation) is started and terminated. | face++ (Face++ user state estimation)
-| mediapipe | Start and exit mediapipe (mediapipe user state estimation). (available for windows only) |
-| userstatus | userstatus (a module that estimates dialogue participation from mediapipe results) is started and terminated. | userstatus
+| IP address of this PC | This is the IP address that the Android application uses to connect to the PC. |
+| Path of D4AC package | The destination path of the D4AC package you are running. This is the path to the D4AC package where you want to save the interactive image. |
+| dialog_server | Start/stop the dialog_server (dialog server). |
+| d4ac_main | Start/stop d4ac_main (main program). |
+| video_input | Start/stop video_input (camera image input) Start only when using Chrome. |
+| face++ (Face++ user state estimation) is started and terminated. | Start/stop Face++ (Face++ user state estimation) |
+| mediapipe | Start/stop mediapipe (mediapipe user state estimation). (available for windows only) |
+| userstates | Start/stop userstates (a module that estimates engagement from mediapipe results) |
 
 When each program is started, `running` is displayed on the screen. The running program can be stopped by pressing the `stop` button.
 
@@ -276,13 +264,13 @@ When each program is started, `running` is displayed on the screen. The running 
 
 - When using Chrome
 
-  Select the Start processes tab on the configuration screen and start the necessary processes from there.
+  Select the `Start processes` tab on the configuration screen and start the necessary processes from there.
 
-  dialog_server and d4ac_main must be started.
+  `dialog_server` and `d4ac_main` must be started.
 
-  To perform user state estimation from image information, start video_input and then either face++ or mediapipe (Windows only). It takes quite a while (about 1 minute) for the image input screen to appear.
+  To perform user state estimation from images, start `video_input` and then either `face++` or `mediapipe` (Windows only). It takes quite a while (about 1 minute) for the image input screen to appear.
 
-  When using mediapipe, userstatus must also be activated.
+  When using `mediapipe`, `userstates` must also be activated.
 
   After launching, run chrome and connect to `http://localhost:8000/`, a menu will appear on the screen.
 
@@ -292,16 +280,16 @@ When each program is started, `running` is displayed on the screen. The running 
   |Amazon Polly |Enables spoken dialogue mode using Amazon Polly speech synthesis. |Amazon Polly
   |Text IO |Text input/output mode. |Text IO
 
-  Click "Start Dialog" on the   Utterance screen to start the dialogue.
+  Click `Start Dialog` on the   Utterance screen to start the dialogue.
 
-  User state estimation results cannot be sent on the   Text IO screen.
+  User state estimation results cannot be sent on the Text IO screen.
 
   To resume the dialogue, press the reload button on your browser.
 
 - If you want to use the android D4AC client app on the front end instead of Chrome
 
   - Install the apk file on your android. (The installation method differs depending on the OS, so please check the settings of your android OS.)
-  - The android D4AC client application acquires the face image and sends the face image data to the user state estimation result program on the PC side, so the video_input of the above activation method is not activated.
+  - The android D4AC client application acquires the facial image and sends the facial image data to the user state estimation result program on the PC side, so the video_input of the above activation method is not activated.
   - Connect the   android device to the same network as the PC running D4AC via wifi, etc. Please ask your network administrator how to join the network.
   - If your   Windows is configured with a firewall such as anti-virus software, you will not be able to connect to the MQTT network from outside. Please disable it temporarily or change the setting so that MQTT port 1883 can be accessed from the outside.
 
@@ -321,12 +309,12 @@ When each program is started, `running` is displayed on the screen. The running 
   - Enter the above IPV4 address in the   Server address field.
   - Enter 8000 for the   Server http port.
   - Once you have entered the information, click the Back button to exit the application and reopen it. If the setting is successful, you will be able to press the Start button.
-  - Press the   Start button to display the face image and enter the voice input state.
+  - Press the   Start button to display the facial image and enter the voice input state.
   - The application can be closed by pressing the Back button.
 
-## Ended
+## Stop
 
-In the `System Startup` tab of the D4AC application, exit the running programs individually, or click the `Exit` button in the lower left corner of the setup screen.
+In the `System Startup` tab of the D4AC application, exit the running programs individually, or click the `Close` button in the lower left corner of the GUI.
 
 ## Communicate with Dialogue Server
 
@@ -334,28 +322,28 @@ In the `System Startup` tab of the D4AC application, exit the running programs i
 
 You can choose from `xaiml_sunaba`, `dialbb`, `dummy_dialog`, or `test_dialog` as the dialog server type.
 
-- xaiml_sunaba uses NTT Docomo's [xAIML-SUNABA](https://docs.sunaba.docomo.ne.jp/) as a dialog server.
+- `xaiml_sunaba` uses NTT Docomo's [xAIML-SUNABA](https://docs.sunaba.docomo.ne.jp/) as a dialog server.
 
-- dialbb uses [DialBB]() of C4A Laboratory as a dialog server. It will be described in the future.
-- dummy_dialog uses a dialog management section that returns a large portion of the dialog. This is for checking the operation.
+- `dialbb` uses [DialBB]() of C4A Research Institute as a dialog server. 
+- `dummy_dialog` uses a dialog manager that returns a large portion of the dialog. This is for checking the operation.
 - test_dialog is for developer testing and is not normally used.
 
 ### Configure each type of server
 
 - xAIML SUNABA
-  - After running the xAIML SUNABA application, set the botID and initTopicID in the Dialog server tab of the D4AC configuration screen.
+  - After running the xAIML SUNABA application, set the `botID` and `initTopicID` in the `Dialog server` tab of the D4AC configuration screen.
     Please refer to [xAIML-SUNABA documentation](https://docs.sunaba.docomo.ne.jp/documentation/) for more information on these.
 - DialBB
   - Run the DialBB web application on port number `8081`. (Note that this is different from the DialBB default port number.)
 
-### Transmission of user state estimation result acquisition result
+### Sending user state estimation results 
 
 There are four types of user states
 
 | Type | Value
 | ---------- | ------------------------------------------------------------ |
 | engagement | "high", "middle", or "low" | "high", "middle", or "low" | "low
-| "anger", "disgust", "fear", "happiness", "neutral", "sadness", or "surprise".
+| emotion    | "anger", "disgust", "fear", "happiness", "neutral", "sadness", or "surprise".
 | age        | "child", "teenager", "young", "middle", "senior", or "unknown" |
 | gender | "male" or "female" |
 
@@ -392,9 +380,9 @@ The result of the user state estimation is sent in the `"aux_data"` of the reque
 
 ```json
 {
-    "engagement": "high", "engagement".
-    "emotion": "happiness",.
-    "gender": "male", "gender".
+    "engagement": "high", 
+    "emotion": "happiness",
+    "gender": "male", 
     "age": "child"
 }
 ````
@@ -416,7 +404,7 @@ If you do not want the system to speak anything, specify `"empty"` for system sp
 
 ### Request to send user state estimation results
 
-If "Send only when requested" is checked in the User status tab of the configuration screen, the sending of user status estimation results after the end of system speech and before the start of user speech after the end of system speech is performed only when a request from the dialog server is matched. The transmission of user state estimation results after the end of system speech and before the start of user speech is performed only when a request from the dialog server matches.
+If "`Send only when requested`" is checked in the User states tab of the configuration screen, the sending of user state estimation results after the end of system speech and before the start of user speech after the end of system speech is performed only when a request from the dialog server is matched. The transmission of user state estimation results after the end of system speech and before the start of user speech is performed only when a request from the dialog server matches.
 
 The request is written after the system speech string in the following format.
 
@@ -444,7 +432,7 @@ silence+{engagement:sadness}
 
 Otherwise, nothing is sent. 
 
-## Send output from dialogue server to external server (for advanced users)
+## Send output from dialogue server to external server (for experts)
 
 The response from dialog_server can be forwarded to an external server and the results returned to the user.
 
@@ -469,7 +457,7 @@ If not used, the external server transmission function must be turned off for pr
 
 The development of D4AC was supported by [Graduate Program for Lifestyle Revolution based on Transdisciplinary Mobility Innovation  (TMI Program)](https://www.tmi.mirai.nagoya-u.ac.jp/en/). We would like to express our gratitude to all parties involved.
 
-## Quote
+## Citation
 
 Please cite the following references when publishing results using D4AC.
 

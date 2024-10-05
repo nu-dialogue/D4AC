@@ -36,21 +36,21 @@ class SunabaDialog:
         # つまらないですか？を繰り返さないためのフラグ
         self.system_responded_to_non_utterance = False
 
-    def _add_user_status(self, text, userStatus):
-        if userStatus is None:
+    def _add_user_status(self, text, user_states):
+        if user_states is None:
             return text
         else:
             user_status = '+'
-            engagement = userStatus.get('engagement')
+            engagement = user_states.get('engagement')
             if engagement is not None:
                 user_status += '{engagement:'+engagement + '}'
-            emotion = userStatus.get('emotion')
+            emotion = user_states.get('emotion')
             if emotion is not None:
                 user_status += '{emotion:' + emotion + '}'
-            gender = userStatus.get('gender')
+            gender = user_states.get('gender')
             if gender is not None:
                 user_status += '{gender:' + gender + '}'
-            age = userStatus.get('age')
+            age = user_states.get('age')
             if age is not None:
                 user_status += '{age:' + age + '}'
             return text + user_status

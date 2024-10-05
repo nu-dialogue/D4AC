@@ -62,68 +62,67 @@ D4ACをインストールするためには，pythonのインストール，パ�
 pythonのインストール方法は，複数の方法があります．代表的なものを説明します．
 
 - Windows
-  [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/) から Python for Windowsをインストールする．
-
-  Python for Windows 3.9.9で動作確認をしているが，3.8以上であれば動く可能性がある．
-
-  インストール最初の画面の"Add Python 3.x to PATH" をチェックするのを忘れないようにしてください．
+  
+  - [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/) から Python for Windowsをインストールします。
+  
+  - Python for Windows 3.9.9で動作確認をしているが，3.8以上であれば動く可能性があります。
+  
+  - インストール最初の画面の"Add Python 3.x to PATH" をチェックするのを忘れないようにしてください．
   
 - Mac
 
-  brewをインストールする．
-
-  [https://brew.sh/](https://brew.sh/)参照
-
-  pythonのインストール
-
-  macのpython3をbrewでインストールする.
+  - brewのインストール
+  - [https://brew.sh/](https://brew.sh/)などを参照してbrewをインストールします。
   
+- pythonのインストール
+  
+
+macのpython3をbrewでインストールする.
+
   ```sh
   brew install python-tk
   ```
 
-  `python`ではなく，`python-tk`をインストールしてください．そうでないと，GUIが表示できません．
+`python`ではなく，`python-tk`をインストールしてください．そうでないと，GUIが表示できません．
 
 ### D4ACパッケージのインストール
 
-- whlファイルをダウンロードします．
+- whlファイルのダウンロード．
 
-  [D4ACのページ](https://github.com/nu-dialogue/D4AC) にある `d4ac-x.x.x-py3-none-any.whl` というファイルをクリックし開いたのち，右上の下向き矢印をクリックしてダウンロードしてください．ダウンロードした後，適当なフォルダに移動させてください．
+  - [D4ACのページ](https://github.com/nu-dialogue/D4AC) にある `d4ac-x.x.x-py3-none-any.whl` というファイルをクリックし開いたのち，右上の下向き矢印をクリックしてダウンロードしてください．ダウンロードした後，適当なフォルダに移動させてください．
 
 - パッケージのインストール
 
-  コマンドプロンプト(macの場合はターミナル)を開き，whlファイルをおいたフォルダに移動し，次のコマンドを入力します．
+  - コマンドプロンプト(macの場合はターミナル)を開き，whlファイルをおいたフォルダに移動し，次のコマンドを入力します．
 
   ```sh
   pip install <ダウンロードしたwhlファイルの名前> 
   ```
 
-   `<ダウンロードしたwhlファイルの名前> ` の部分はダウンロードしたwhlファイルの名前に置き換えてください．
+  - `<ダウンロードしたwhlファイルの名前> ` の部分はダウンロードしたwhlファイルの名前に置き換えてください．
 
-  pythonのインストール環境によっては，`pip`ではなく`pip3`の場合があります．
+  - pythonのインストール環境によっては，`pip`ではなく`pip3`の場合があります．
 
-  上記のコマンドを入力すると，自動的に必要なパッケージをインターネットからダウンロードしてインストールします．
+  - 上記のコマンドを入力すると，自動的に必要なパッケージをインターネットからダウンロードしてインストールします．
 
 ### mosquittoのインストール
 
-ユーザ状態推定結果を使用した対話をするためにmosquittoというMQTTのサービスをインストールする必要があります．
+ユーザ状態推定結果を使用した対話をするためにMosquittoというMQTTのサービスをインストールする必要があります．
 
-以下の手順に従って，mosquittoをインストールしてください．
+ 以下の手順に従って，mosquittoをインストールしてください．
 
 - Windows の場合
   
-  [https://mosquitto.org/download/](https://mosquitto.org/download/) からWindows用バイナリをダウンロードしてください．
+  - [https://mosquitto.org/download/](https://mosquitto.org/download/) からWindows用バイナリをダウンロードしてください．
+    - Binary InstallationのWindowsのところにあります．
+    - 64-bit buildか32-bit buildかはお使いのコンピュータのOSに応じて選択してください．
   
-  Binary InstallationのWindowsのところにあります．
-  
-  64-bit buildか32-bit buildかはお使いのコンピュータのOSに応じて選択してください．
+  - ダウンロードしたファイルをダブルクリック開き，インストールしてください．すべてデフォルトを選ぶので構いません．
 
-  ダウンロードしたファイルをダブルクリック開き，インストールしてください．すべてデフォルトを選ぶので構いません．
-  
   Windows 10の場合，Ctrlキー，Altキー，Deleteキーを同時に押し，「タスクマネージャ」をクリックしてください．
-
-  「サービス」というタブをクリックし，名前がmosquittoのところにカーソルを合わせ，右クリックし．「開始」を選んでください．
   
+  「サービス」というタブをクリックし，名前がmosquittoのところにカーソルを合わせ，右クリックし．「開始」を選んでください．
+
 - macの場合
   
   以下の手順でインストールし，起動します．
@@ -144,11 +143,9 @@ pythonのインストール方法は，複数の方法があります．代表�
     /opt/homebrew/opt/mosquitto/sbin/mosquitto -c /opt/homebrew/etc/mosquitto/mosquitto.conf
   ```
 
-### Androidを使用する場合のmosquitto の設定
+### Androidを使用する場合のMosquittoの設定
 
-Androidを使用する場合は，MQTTのインストール設定がPC外部（ネットワーク上のマシン）から接続を許可できないように設定されているので，MQTTの設定を変更してください．Windows の場合，`c:\program files\mosquitto\mosquite.conf`,macの場合は`/opt/homebrew/etc/mosquitto/mosquitto.conf` です．
-
-  設定ファイルをテキストエディタ（メモ帳など）で開いて，以下の項目を追加して保存ください．  
+Androidを使用する場合は，以下のようにMQTTの設定を変更してください．Windows の場合，`c:\program files\mosquitto\mosquite.conf`,macの場合は`/opt/homebrew/etc/mosquitto/mosquitto.conf` をテキストエディタ（メモ帳など）で開いて，以下を書き加えて保存ください．  
 
   ```txt
   listener 1883
@@ -179,18 +176,18 @@ windowsの場合，以下の手順でショートカットを作成して起動�
 
 D4ACを起動すると，設定画面が表示されます．そこにて各種設定，システムの起動，終了をすることができます．
 
-共通項目
+#### 共通項目
 
-| 内容 | 説明 |
+| ボタン | 説明 |
 |-----|------|
-| 設定 | 設定をyamlファイルに書き込みます．設定ボタンをクリックしないと設定内容は反映されません． |
-| 終了 | プログラムを終了します．起動しているD4AC関連プログラムも終了します． |
+| Save | 設定をyamlファイルに書き込みます．このボタンをクリックしないと設定内容は反映されません． |
+| Close | プログラムを終了します．起動しているD4AC関連プログラムも終了します． |
 
 #### User states タブ
 
 ![d4ac1](docs/images/d4ac1.png)
 
-| 内容 | 説明 |
+| 項目 | 説明 |
 |-----|------|
 | Camera device ID | カメラのデバイスのIDを表す0以上の整数を入れます． |
 | Recognize speech continuously | システム発話中も含め，音声認識を常時行う場合にチェックを入れます．スピーカーのシステム発話が認識される場合があるので，注意してください．androidアプリでは無効です． |
@@ -208,7 +205,7 @@ D4ACを起動すると，設定画面が表示されます．そこにて各種�
 
 ![d4ac2](docs/images/d4ac2.png)
 
-| 内容 | 説明 |
+| 項目 | 説明 |
 |-----|------|
 |server_type | サーバタイプを切り替えることができます．現在は`xaiml_sunaba`，`dialbb`，`dummy_dialog`, `test_dialog`が選べます（後述）． |
 | Botid | sunabaを使用している場合のBotid |
@@ -216,13 +213,15 @@ D4ACを起動すると，設定画面が表示されます．そこにて各種�
 
 #### Amazon Polly TTSタブ
 
-音声合成をAmazon Polyを用いて行うための設定です．
+音声合成をAmazon Pollyを用いて行うための設定です．
 
 identity PoolIdとregionを設定します。これらを取得するには、AWSのアカウントの取得と設定が必要で、その方法は[このページ](https://docs.aws.amazon.com/ja_jp/sdk-for-javascript/v2/developer-guide/getting-started-browser.html)に載っていますが、技術知識が必要なので、詳しい人に聞いてください。
 
+今は日本人男性(Takumi)の声しか使えません。
+
 ![d4ac3](docs/images/d4ac3.png)
 
-| 内容 | 説明 |
+| 項目 | 説明 |
 |-----|------|
 | identityPoolId | amazon pollyのidentityPoolId|
 | region |  amazon pollyのregion|
@@ -233,16 +232,16 @@ identity PoolIdとregionを設定します。これらを取得するには、AW
 
 ![d4ac4](docs/images/d4ac4.png)
 
-| 内容 | 説明 |
+| 項目 | 説明 |
 |-----|------|
-| 対話サーバ処理結果を外部サーバに送信 | 対話サーバ処理結果を外部サーバに送信するかどうかのフラグ．外部サーバを使用しない場合はオフにしてください． |
-| 外部サーバURL | 外部サーバ送信先URL|
+| Post dialog server outputs to the external server | 対話サーバ処理結果を外部サーバに送信するかどうかのフラグ． |
+| External server URL | 外部サーバ送信先URL|
 
 #### Face++タブ
 
 ![d4ac5](docs/images/d4ac5.png)
 
-| 内容 | 説明 |
+| 項目 | 説明 |
 |-----|------|
 | API key | Face++のAPI keyを入力します． |
 | API Secret | Face++のAPI Secret入力します． |
@@ -255,7 +254,7 @@ Face++のAPI Key, API Secretの取得方法については，[ここ](docs/facep
 
 ![d4ac6](docs/images/d4ac6.png)
 
-| 内容 | 説明 |
+| 項目 | 説明 |
 |-----|------|
 | IP address of this PC | Androidアプリが接続するときのIPアドレスです．androidアプリで接続するときに参考にしてください．|
 | Path of D4AC package | 実行しているD4ACパッケージの保存先パスです．対話中のイメージを保存するときに参考にしてください．|
@@ -331,8 +330,7 @@ D4ACアプリケーションの`システム起動`タブで，実行中のプ�
 対話サーバのタイプは`xaiml_sunaba`，`dialbb`，`dummy_dialog`, `test_dialog`が選べます．
 
 - xaiml_sunabaはNTT Docomoの[xAIML-SUNABA](https://docs.sunaba.docomo.ne.jp/)を対話サーバとして使うものです．
-
-- dialbbはC4A研究所の[DialBB]()を対話サーバとして使うものです．今後記述していきます．
+- dialbbはC4A研究所の[DialBB]()を対話サーバとして使うものです。
 - dummy_dialogはおおむ返しをする対話管理部を用います．動作確認用です．
 - test_dialogは開発者のテスト用なので，通常は使いません．
 

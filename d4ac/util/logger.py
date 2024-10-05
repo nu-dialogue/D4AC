@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# user_status_estimator.py
-#   estimate user status from mediapipe output
+# logger.py
+#   estimate user states from mediapipe output
 # (c) Nagoya University
 
 
