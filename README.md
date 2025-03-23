@@ -91,7 +91,7 @@ There are several ways to install python. The following is a description of the 
 
 - Downloading the whl file.
 
-  - Click on the file `d4ac-x.x.x-py3-none-any.whl` on the   [D4AC page](https://github.com/nu-dialogue/D4AC), open it, and then click the down arrow in the upper right corner to download. After downloading, move the file to an appropriate folder.
+  - Click on the file `d4ac-x.x.x-py3-none-any.whl` on the   [distribution page](dist), open it, and then click the down arrow in the upper right corner to download. After downloading, move the file to an appropriate folder.
 
 - Installing packages
 
