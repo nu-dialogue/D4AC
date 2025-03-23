@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "d4ac"
-version = "0.1.1"
+version = "1.0.1"
 description = ""
 authors = ["Mikio Nakano <mikio.nakano@c4a.jp>"]
 packages = [
@@ -55,7 +55,7 @@ openpyxl="^3.0.9"
 TkEasyGUI = "^0.2.73"
 requests = "^2.28.1"
 azure-cognitiveservices-vision-face = "^0.6.0"
-mediapipe =  { version = "^0.9.0" ,markers = "sys_platform == 'win32'" }
+mediapipe =  { version = "^0.10.0" ,markers = "sys_platform == 'win32'" }
 
 [tool.poetry.dev-dependencies]
 

@@ -340,9 +340,9 @@ D4ACアプリケーションの`システム起動`タブで，実行中のプ�
   - xAIML SUNABAのアプリケーションを動かしたのち，D4ACの設定画面のDialog serverタブでbotIDとinitTopicIDを設定します．
     これらについては[xAIML-SUNABAのドキュメント](https://docs.sunaba.docomo.ne.jp/documentation/)を参照してください．
 - DialBB
-  - DialBBのwebアプリケーションをポート番号`8081`で動作させておきます．（DialBBのデフォルトのポート番号とは異なることに注意してください．）
+  - DialBBのwebアプリケーションをポート番号`8080`で動作させておきます．
 
-### ユーザ状態推定結果取得結果の送信
+### ユーザ状態推定結果の送信
 
 ユーザ状態は以下の4種類です．
 

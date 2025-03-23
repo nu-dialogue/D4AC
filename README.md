@@ -334,7 +334,7 @@ You can choose from `xaiml_sunaba`, `dialbb`, `dummy_dialog`, or `test_dialog` a
   - After running the xAIML SUNABA application, set the `botID` and `initTopicID` in the `Dialog server` tab of the D4AC configuration screen.
     Please refer to [xAIML-SUNABA documentation](https://docs.sunaba.docomo.ne.jp/documentation/) for more information on these.
 - DialBB
-  - Run the DialBB web application on port number `8081`. (Note that this is different from the DialBB default port number.)
+  - Run the DialBB web application on port number `8080`. 
 
 ### Sending user state estimation results 
 
