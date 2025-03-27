@@ -74,6 +74,9 @@ def start(utterance: str):
     data = {"initial": True, "userUtterance": utterance,
             "timestamp": timestamp}
     try:
+        print(url)
+        print(str(headers))
+        print(str(data))
         request = urllib.request.Request(url, json.dumps(data).encode(), headers, method="POST")
         response = urllib.request.urlopen(request)
     except Exception():

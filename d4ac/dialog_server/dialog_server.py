@@ -38,7 +38,7 @@ class Item(BaseModel):
     sessionId: Optional[str] = ""
     userUtterance: Optional[str] = ""
     userStatus: Optional[dict] = {}
-    timestamp: Optional[str] = ""
+    timestamp: Optional[float] = ""
 
 
 app = FastAPI()
@@ -53,6 +53,7 @@ async def hello():
 
 @app.post("/dialog/")
 async def create_item(item: Item):
+    print(str(item))
     logger.info("app.post /dialog/ " + str(item))
 
     # 対話管理からのrequestが指定されていてrequestにマッチしなければシステム発話終了時・無音時にはユーザ状態を送らない
