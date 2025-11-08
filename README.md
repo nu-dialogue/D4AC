@@ -2,7 +2,7 @@
 
 [日本語版](README-ja.md)
 
-ver 1.0.1
+ver 1.0.2
 
 ## Overview
 
