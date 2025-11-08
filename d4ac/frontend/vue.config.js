@@ -1,4 +1,5 @@
-module.exports = {
-    publicPath: '',
-    assetsDir: 'static'
-  }
+module.exports = { 
+  publicPath: '',
+  assetsDir: 'static',
+  transpileDependencies: []
+}
