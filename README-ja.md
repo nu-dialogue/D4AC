@@ -1,6 +1,6 @@
 # D4AC: マルチモーダル対話システム構築ツール
 
-ver 1.0.2
+ver 1.0.3
 
 ## 概要
 
@@ -12,7 +12,7 @@ NTTドコモの[xAIML SUNABA](https://docs.xaiml.docomo-dialog.com/#) またはC
 
 ユーザの顔画像の認識結果から推定した対話参加度や，ユーザの状態に依存して動作を変更する対話システムを作成することができます．
 
- D4ACは以下の環境で動作確認を行っています．
+D4ACは現在 Python 3.11 以上が必要です．以下の環境は過去の実行環境例です．
 
 - OS: Windows 10 Pro 64bit
   
@@ -65,7 +65,7 @@ pythonのインストール方法は，複数の方法があります．代表�
   
   - [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/) から Python for Windowsをインストールします。
   
-  - Python for Windows 3.9.9で動作確認をしているが，3.8以上であれば動く可能性があります。
+  - D4ACの利用には Python 3.11 以上が必要です。
   
   - インストール最初の画面の"Add Python 3.x to PATH" をチェックするのを忘れないようにしてください．
   

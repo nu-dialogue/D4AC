@@ -2,7 +2,7 @@
 
 [日本語版](README-ja.md)
 
-ver 1.0.2
+ver 1.0.3
 
 ## Overview
 
@@ -15,7 +15,7 @@ After lauching the dialog server and D4AC, you can connect to D4AC from Chrome o
 
 It is possible to create a dialogue system that changes its behavior depending on the engagement level estimated from the recognition results of the user's facial image, or on the user's state.
 
- D4AC has been tested in the following environments.
+D4AC currently requires Python 3.11 or later. The environments below are historical examples of execution environments.
 
 - OS: Windows 10 Pro 64bit
   
@@ -68,7 +68,7 @@ There are several ways to install python. The following is a description of the 
   
   - Install Python for Windows from   [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/).
   
-  - We have confirmed that it works with Python for Windows 3.9.9, but it may work with 3.8 or higher.
+  - D4AC requires Python 3.11 or later.
   
   - Remember to check the "Add Python 3.x to PATH" box on the first screen of the installation.
   
