@@ -76,7 +76,7 @@ export default {
       console.log(`speechfuncAmazon ${utterance}`)
       speechParams.Text = utterance;
       try {
-        let url = await getSynthesizeSpeechUrl({
+        const url = await getSynthesizeSpeechUrl({
           client,
           params: speechParams,
         });
