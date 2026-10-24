@@ -25,7 +25,7 @@ include = ["d4ac/d4ac_main/static/css/*.css",
 python = ">=3.11,<4.0"
 aiofiles="^0.6.0"
 altgraph="^0.17"
-certifi="^2025.1.31"
+certifi=">=2025.1.31,<2027.0.0"
 click="^8.5.0"
 fastapi="^0.141.1"
 future="^0.18.2"
